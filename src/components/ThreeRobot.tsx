@@ -1,9 +1,41 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { Environment, Float, ContactShadows, Sparkles } from '@react-three/drei';
+
+// Hook to detect mobile
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    return isMobile;
+}
+
+// Camera controller for mobile zoom
+function CameraController({ isMobile }: { isMobile: boolean }) {
+    const { camera } = useThree();
+
+    useEffect(() => {
+        if (isMobile) {
+            camera.position.z = 3.2; // Closer camera on mobile
+        } else {
+            camera.position.z = 5;
+        }
+        camera.updateProjectionMatrix();
+    }, [isMobile, camera]);
+
+    return null;
+}
 
 function CuteBeanRobot({ scale = 1 }: { scale?: number }) {
     const headRef = useRef<any>(null);
@@ -137,9 +169,13 @@ function CuteBeanRobot({ scale = 1 }: { scale?: number }) {
 }
 
 export default function ThreeRobot() {
+    const isMobile = useIsMobile();
+
     return (
         <div className="three-wrapper">
-            <Canvas camera={{ position: [0, 0, 5], fov: 45 }} gl={{ antialias: true }}>
+            <Canvas camera={{ position: [0, 0, 5], fov: isMobile ? 50 : 45 }} gl={{ antialias: true }}>
+                <CameraController isMobile={isMobile} />
+
                 {/* Lighting - Sharper and more dramatic */}
                 <ambientLight intensity={0.2} />
                 <pointLight position={[10, 10, 10]} intensity={1.5} />
@@ -149,10 +185,10 @@ export default function ThreeRobot() {
                 {/* Sci-fi Floor Grid - Removed for pure black background */}
                 {/* <Grid ... /> removed */}
 
-                <CuteBeanRobot scale={0.8} />
+                <CuteBeanRobot scale={isMobile ? 1.1 : 0.8} />
 
-                {/* Particles - Starry Night */}
-                <Sparkles count={200} scale={10} size={2} speed={0.2} opacity={0.8} color="#ffffff" />
+                {/* Particles - Starry Night - reduce on mobile for performance */}
+                <Sparkles count={isMobile ? 100 : 200} scale={10} size={2} speed={0.2} opacity={0.8} color="#ffffff" />
 
                 {/* Post Processing Removed for maximum sharpness */}
                 {/* <EffectComposer disableNormalPass>
