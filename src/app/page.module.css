@@ -179,29 +179,33 @@
 
 .appImageWrapper {
     position: relative;
-    height: 300px;
+    height: auto;
+    min-height: 350px;
+    padding: 2rem;
     background: #1a1a1a;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 .appImage {
-    width: 80%;
+    width: 45%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     z-index: 2;
+    object-fit: contain;
 }
 
 .appImageSecondary {
-    position: absolute;
-    top: 20px;
-    right: -20px;
-    opacity: 0.5;
-    transform: scale(0.8) rotate(10deg);
+    position: relative;
+    top: 0;
+    right: 0;
+    opacity: 1;
+    transform: none;
     z-index: 1;
+    margin-top: 0;
 }
 
 .appInfo {
@@ -393,7 +397,14 @@
     }
 
     .appImageWrapper {
-        height: 250px;
+        height: auto;
+        flex-direction: column;
+        padding: 3rem 1rem;
+        min-height: auto;
+    }
+
+    .appImage {
+        width: 90%;
     }
 
     .serviceSection {
