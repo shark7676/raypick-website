@@ -27,9 +27,9 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
 
     useEffect(() => {
         if (isMobile) {
-            camera.position.z = 2.8; // Even closer camera on mobile
+            camera.position.set(0, -0.3, 3.5); // Move camera down and back to show full robot
         } else {
-            camera.position.z = 5;
+            camera.position.set(0, 0, 5);
         }
         camera.updateProjectionMatrix();
     }, [isMobile, camera]);
