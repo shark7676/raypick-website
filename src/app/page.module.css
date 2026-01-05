@@ -1,0 +1,358 @@
+.mainContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.heroSection {
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 80vh;
+    padding: 4rem 2rem 2rem 2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: linear-gradient(180deg, #000000 0%, #020205 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .heroSection {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 4rem 4rem;
+        min-height: 80vh;
+    }
+}
+
+.heroContent {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+/* Metallic Shimmer Title */
+.title {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+    text-transform: uppercase;
+    position: relative;
+
+    /* Clean, Futuristic Gradient Text */
+    background: linear-gradient(to right, #ffffff, #a0a0a0, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
+
+    /* Subtle Glow instead of Glitch */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Clean Neon Highlight */
+.highlight {
+    color: #00ffff;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+    font-weight: 700;
+}
+
+/* Description with Line Breaks */
+.description {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 1.1rem;
+    color: #00ffff;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    line-height: 1.6;
+    border-left: 2px solid #00ffff;
+    padding-left: 1.5rem;
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+    white-space: pre-line;
+}
+
+/* Holographic Button */
+.ctaButton {
+    font-family: var(--font-orbitron), sans-serif;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00ffff;
+    background: transparent;
+    border: 2px solid #00ffff;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.ctaButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #00ffff;
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.ctaButton:hover {
+    color: #000;
+    box-shadow: 0 0 30px #00ffff;
+}
+
+.ctaButton:hover::before {
+    left: 0;
+}
+
+.heroVisual {
+    flex: 1.2;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -2rem;
+}
+
+@media (min-width: 768px) {
+    .heroVisual {
+        height: 70vh;
+    }
+}
+
+/* App Showcase Section */
+.showcaseSection {
+    padding: 6rem 2rem;
+    background: linear-gradient(180deg, #020205 0%, #0a0a0a 100%);
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.appGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.appCard {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.appCard:hover {
+    transform: translateY(-10px);
+}
+
+.appImageWrapper {
+    position: relative;
+    height: 300px;
+    background: #1a1a1a;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.appImage {
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.appImageSecondary {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    opacity: 0.5;
+    transform: scale(0.8) rotate(10deg);
+    z-index: 1;
+}
+
+.appInfo {
+    padding: 2rem;
+}
+
+.appLogoPlaceholder {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.appName {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.appDescription {
+    color: #888;
+    line-height: 1.6;
+}
+
+/* Service Section */
+.serviceSection {
+    padding: 6rem 2rem;
+    background-color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.serviceContent {
+    flex: 1;
+    max-width: 500px;
+}
+
+.serviceDescription {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.serviceList {
+    list-style: none;
+    padding: 0;
+}
+
+.serviceList li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.serviceList li::before {
+    content: '✓';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+}
+
+.serviceVisual {
+    flex: 1;
+    max-width: 600px;
+}
+
+.serviceImage {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+/* Footer */
+.footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.footerText {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.footerDomain {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* About Section */
+.aboutSection {
+    padding: 8rem 2rem;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+}
+
+.aboutContent {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
+
+.aboutIntro {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 4rem;
+    white-space: pre-line;
+    /* Important for line breaks */
+    font-weight: 300;
+}
+
+.aboutGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.aboutCard {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.aboutCard:hover {
+    transform: translateY(-10px);
+    border-color: #00ffff;
+}
+
+.aboutCardTitle {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.aboutCardDesc {
+    color: #888;
+    line-height: 1.6;
+    white-space: pre-line;
+}
