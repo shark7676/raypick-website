@@ -29,18 +29,19 @@ export default function AppShowcase() {
                     </div>
                 </div>
 
-                {/* App 2: Coming Soon or Placeholder */}
-                <div className={styles.appCard} style={{ opacity: 0.5 }}>
+                {/* App 2: Cosync */}
+                <div className={styles.appCard}>
                     <div className={styles.appImageWrapper}>
-                        <div style={{ width: '100%', height: '100%', background: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-                            Computing...
-                        </div>
+                        <img src="/images/cosync/screenshot1.jpg" alt="Cosync Main" className={styles.appImage} />
+                        <img src="/images/cosync/screenshot2.jpg" alt="Cosync Detail" className={styles.appImage} />
                     </div>
                     <div className={styles.appInfo}>
-                        <div className={styles.appLogoPlaceholder}>?</div>
-                        <h3 className={styles.appName}>Coming Soon</h3>
+                        <img src="/images/cosync/logo.png" alt="Cosync Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem' }} />
+                        <h3 className={styles.appName}>Cosync</h3>
                         <p className={styles.appDescription}>
-                            Next innovation loading...
+                            나사의 실시간 우주 데이터를 기반으로 별성점과<br />
+                            동양의 명리학, 오행을 융합하여 분석합니다.<br />
+                            당신의 <strong>출생 기운과 현재의 기운</strong>을 설명해주는 앱입니다.
                         </p>
                     </div>
                 </div>
