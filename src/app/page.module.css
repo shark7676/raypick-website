@@ -135,11 +135,13 @@
     justify-content: center;
     align-items: center;
     margin-left: 0;
+    margin-top: 3rem;
 }
 
 @media (min-width: 768px) {
     .heroVisual {
         height: 70vh;
+        margin-top: 0;
     }
 }
 
