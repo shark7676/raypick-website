@@ -36,7 +36,7 @@ export default function AppShowcase() {
                         <img src="/images/cosync/screenshot2.jpg" alt="Cosync Detail" className={styles.appImage} />
                     </div>
                     <div className={styles.appInfo}>
-                        <img src="/images/cosync/logo.png" alt="Cosync Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem' }} />
+                        <img src="/images/cosync/logo.png" alt="Cosync Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem', borderRadius: '20px' }} />
                         <h3 className={styles.appName}>Cosync</h3>
                         <p className={styles.appDescription}>
                             나사의 실시간 우주 데이터를 기반으로 별성점과<br />
