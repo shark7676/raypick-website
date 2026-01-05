@@ -27,7 +27,7 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
 
     useEffect(() => {
         if (isMobile) {
-            camera.position.z = 3.2; // Closer camera on mobile
+            camera.position.z = 2.8; // Even closer camera on mobile
         } else {
             camera.position.z = 5;
         }

@@ -7,11 +7,11 @@
 .heroSection {
     display: flex;
     flex-direction: column-reverse;
-    min-height: 80vh;
-    padding: 4rem 2rem 2rem 2rem;
+    min-height: 85vh;
+    padding: 2rem 1.5rem 1rem 1.5rem;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0;
     background: linear-gradient(180deg, #000000 0%, #020205 100%);
     position: relative;
     overflow: hidden;
