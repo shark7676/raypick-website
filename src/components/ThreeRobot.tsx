@@ -27,7 +27,7 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
 
     useEffect(() => {
         if (isMobile) {
-            camera.position.set(0, -0.3, 3.5); // Move camera down and back to show full robot
+            camera.position.set(0, -0.8, 4); // Move camera down more to push robot view lower
         } else {
             camera.position.set(0, 0, 5);
         }
