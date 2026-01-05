@@ -27,7 +27,7 @@ function CameraController({ isMobile }: { isMobile: boolean }) {
 
     useEffect(() => {
         if (isMobile) {
-            camera.position.set(0, -1.5, 3.5); // Bigger robot, positioned lower
+            camera.position.set(0, 1.0, 3.5); // Camera up = robot appears lower
         } else {
             camera.position.set(0, 0, 5);
         }
