@@ -9,7 +9,7 @@ export const translations = {
         hero: {
             title: 'Raypick',
             subtitle: 'App & Media',
-            description: '혁신적인 앱 개발 & 창의적인 유튜브 영상 제작.\n당신의 디지털 비전을 현실로 만들어 드립니다.',
+            description: '상상을 현실로, 우리가 정의하는 미래.\nRaypick만의 독창적인 앱과 오리지널 영상 콘텐츠를 만나보세요.',
             cta: '서비스 둘러보기',
         },
         appShowcase: {
@@ -105,7 +105,7 @@ export const translations = {
         hero: {
             title: 'Raypick',
             subtitle: 'App & Media',
-            description: 'Innovative App Development & Creative YouTube Production.\nWe bring your digital vision to life.',
+            description: 'Turning Imagination into Reality, The Future We Define.\nDiscover Raypick\'s unique apps and original video content.',
             cta: 'Explore Services',
         },
         appShowcase: {
