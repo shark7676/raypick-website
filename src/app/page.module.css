@@ -346,13 +346,77 @@
 .aboutCardTitle {
     font-family: var(--font-orbitron), sans-serif;
     font-size: 1.8rem;
-    color: #fff;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.aboutCardDesc {
     color: #888;
     line-height: 1.6;
     white-space: pre-line;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .heroSection {
+        padding: 6rem 1.5rem 2rem 1.5rem;
+        min-height: auto;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .description {
+        font-size: 1rem;
+        max-width: 100%;
+        padding-left: 1rem;
+    }
+
+    .heroVisual {
+        height: auto;
+        min-height: 300px;
+        margin-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .showcaseSection {
+        padding: 4rem 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .appGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .appImageWrapper {
+        height: 250px;
+    }
+
+    .serviceSection {
+        padding: 4rem 1.5rem;
+        gap: 3rem;
+    }
+
+    .serviceDescription {
+        font-size: 1rem;
+    }
+
+    .aboutSection {
+        padding: 5rem 1.5rem;
+    }
+
+    .aboutIntro {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+    }
+
+    .aboutGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .aboutCard {
+        padding: 2rem;
+    }
 }
