@@ -39,7 +39,7 @@ export default function AppShowcase() {
                         <img src="/images/cosync/logo.png" alt="Cosync Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem', borderRadius: '20px' }} />
                         <h3 className={styles.appName}>Cosync</h3>
                         <p className={styles.appDescription}>
-                            NASA의 실시간 우주 데이터를 기반으로 별성점과<br />
+                            NASA의 실시간 우주 데이터를 기반으로 점성술과<br />
                             동양의 명리학, 오행을 융합하여 분석합니다.<br />
                             당신의 <strong>출생 기운과 현재의 기운</strong>을 설명해주는 앱입니다.
                         </p>
