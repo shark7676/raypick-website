@@ -10,7 +10,7 @@ export default function ServiceSection() {
     return (
         <section className={styles.serviceSection}>
             <div className={styles.serviceContent}>
-                <h2 className={styles.sectionTitle}>{t.serviceSection.title} <span className={styles.highlight}>{t.serviceSection.highlight}</span></h2>
+                <h2 className={styles.sectionTitle}>{t.serviceSection.title}<br /><span className={styles.highlight}>{t.serviceSection.highlight}</span></h2>
                 <p className={styles.serviceDescription}>
                     {t.serviceSection.desc}
                 </p>
