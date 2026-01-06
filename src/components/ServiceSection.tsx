@@ -28,6 +28,7 @@ export default function ServiceSection() {
                     height={400}
                     className={styles.serviceImage}
                     style={{ width: '100%', height: 'auto' }}
+                    quality={90}
                 />
             </div>
         </section>

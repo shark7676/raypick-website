@@ -1,6 +1,6 @@
 'use client';
-'use client';
 
+import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
 import styles from '../app/page.module.css';
 
@@ -15,11 +15,11 @@ export default function AppShowcase() {
                 {/* App 1: Jikgwang */}
                 <div className={styles.appCard}>
                     <div className={styles.appImageWrapper}>
-                        <img src="/images/jikgwang/screenshot1.jpg" alt="Jikgwang Main" className={styles.appImage} />
-                        <img src="/images/jikgwang/screenshot2.jpg" alt="Jikgwang Detail" className={`${styles.appImage} ${styles.appImageSecondary}`} />
+                        <Image src="/images/jikgwang/screenshot1.jpg" alt="Jikgwang Main" className={styles.appImage} width={300} height={600} quality={90} />
+                        <Image src="/images/jikgwang/screenshot2.jpg" alt="Jikgwang Detail" className={`${styles.appImage} ${styles.appImageSecondary}`} width={300} height={600} quality={90} />
                     </div>
                     <div className={styles.appInfo}>
-                        <img src="/images/jikgwang/logo.png" alt="Jikgwang Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem' }} />
+                        <Image src="/images/jikgwang/logo.png" alt="Jikgwang Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem' }} quality={90} />
                         <h3 className={styles.appName}>직광 (Jikgwang)</h3>
                         <p className={styles.appDescription}>
                             소상공인, 중소기업 제품, 농어촌 직거래, 개인 행사 및 이벤트를 직접 등록하세요.<br />
@@ -32,11 +32,11 @@ export default function AppShowcase() {
                 {/* App 2: Cosync */}
                 <div className={styles.appCard}>
                     <div className={styles.appImageWrapper}>
-                        <img src="/images/cosync/screenshot1.jpg" alt="Cosync Main" className={styles.appImage} />
-                        <img src="/images/cosync/screenshot2.jpg" alt="Cosync Detail" className={styles.appImage} />
+                        <Image src="/images/cosync/screenshot1.jpg" alt="Cosync Main" className={styles.appImage} width={300} height={600} quality={90} />
+                        <Image src="/images/cosync/screenshot2.jpg" alt="Cosync Detail" className={styles.appImage} width={300} height={600} quality={90} />
                     </div>
                     <div className={styles.appInfo}>
-                        <img src="/images/cosync/logo.png" alt="Cosync Logo" style={{ width: '80px', height: 'auto', marginBottom: '1rem', borderRadius: '20px' }} />
+                        <Image src="/images/cosync/logo.png" alt="Cosync Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem', borderRadius: '20px' }} quality={90} />
                         <h3 className={styles.appName}>Cosync</h3>
                         <p className={styles.appDescription}>
                             NASA의 실시간 우주 데이터를 기반으로 점성술과<br />
