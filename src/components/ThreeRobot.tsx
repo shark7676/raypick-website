@@ -198,22 +198,22 @@ function WhiteCuteRobot({ scale = 1 }: { scale?: number }) {
                     <StarAntenna />
 
                     {/* ANIMATED EYES */}
-                    <group position={[0, 0.1, 0.54]}>
+                    <group position={[0, 0.12, 0.54]}>
                         {/* HAPPY EXPRESSION (^^) */}
                         {expression === 'happy' && (
                             <>
-                                <group position={[-0.18, 0.02, 0]}><mesh><torusGeometry args={[0.08, 0.025, 16, 32, Math.PI]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh></group>
-                                <group position={[0.18, 0.02, 0]}><mesh><torusGeometry args={[0.08, 0.025, 16, 32, Math.PI]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh></group>
+                                <group position={[-0.17, 0.02, 0]}><mesh><torusGeometry args={[0.08, 0.025, 16, 32, Math.PI]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh></group>
+                                <group position={[0.17, 0.02, 0]}><mesh><torusGeometry args={[0.08, 0.025, 16, 32, Math.PI]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh></group>
                             </>
                         )}
                         {/* SAD EXPRESSION (><) */}
                         {expression === 'sad' && (
                             <>
-                                <group position={[-0.18, 0, 0]}>
+                                <group position={[-0.17, 0, 0]}>
                                     <mesh rotation={[0, 0, Math.PI / 3]} position={[-0.01, 0, 0]}><capsuleGeometry args={[0.03, 0.12, 4, 8]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
                                     <mesh rotation={[0, 0, -Math.PI / 3]} position={[-0.01, 0, 0]}><capsuleGeometry args={[0.03, 0.12, 4, 8]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
                                 </group>
-                                <group position={[0.18, 0, 0]}>
+                                <group position={[0.17, 0, 0]}>
                                     <mesh rotation={[0, 0, -Math.PI / 3]} position={[0.01, 0, 0]}><capsuleGeometry args={[0.03, 0.12, 4, 8]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
                                     <mesh rotation={[0, 0, Math.PI / 3]} position={[0.01, 0, 0]}><capsuleGeometry args={[0.03, 0.12, 4, 8]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
                                 </group>
@@ -222,8 +222,8 @@ function WhiteCuteRobot({ scale = 1 }: { scale?: number }) {
                         {/* NEUTRAL EXPRESSION (--) */}
                         {expression === 'neutral' && (
                             <>
-                                <mesh position={[-0.18, 0, 0]} rotation={[0, 0, Math.PI / 2]}><capsuleGeometry args={[0.035, 0.18, 4, 16]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
-                                <mesh position={[0.18, 0, 0]} rotation={[0, 0, Math.PI / 2]}><capsuleGeometry args={[0.035, 0.18, 4, 16]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
+                                <mesh position={[-0.17, 0, 0]} rotation={[0, 0, Math.PI / 2]}><capsuleGeometry args={[0.035, 0.18, 4, 16]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
+                                <mesh position={[0.17, 0, 0]} rotation={[0, 0, Math.PI / 2]}><capsuleGeometry args={[0.035, 0.18, 4, 16]} /><meshBasicMaterial color='#00ffff' toneMapped={false} /></mesh>
                             </>
                         )}
                     </group>
@@ -319,31 +319,43 @@ function DataParticles({ count = 150, color1 = '#00ffff', color2 = '#ff007f' }) 
 
 export default function ThreeRobot() {
     const isMobile = useIsMobile();
+    const [ready, setReady] = useState(false);
 
     return (
         <div className="three-wrapper">
-            <Canvas camera={{ position: [0, 0, 5], fov: isMobile ? 50 : 45 }} gl={{ antialias: true, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.5, alpha: true }}>
-                <CameraController isMobile={isMobile} />
+            {/* Loading Overlay */}
+            <div className={`loader ${ready ? 'hidden' : ''}`}>
+                <div className="spinner"></div>
+                <p>Loading Robot...</p>
+            </div>
 
-                {/* Lighting - Clean Studio Lighting for White Ceramic */}
-                <ambientLight intensity={0.4} />
-                <pointLight position={[10, 10, 10]} intensity={1.0} color="#ffffff" />
-                <spotLight position={[-5, 5, 5]} angle={0.5} penumbra={1} intensity={1.5} color="#ff007f" /> {/* Pink Rim Light */}
-                <spotLight position={[5, -5, 5]} angle={0.5} penumbra={1} intensity={1.5} color="#00ffff" /> {/* Cyan Rim Light */}
-                <pointLight position={[0, 2, 3]} intensity={0.8} color="#ffffff" /> {/* Front Fill */}
+            <div className={`canvas-container ${ready ? 'visible' : ''}`}>
+                <Canvas camera={{ position: [0, 0, 5], fov: isMobile ? 50 : 45 }} gl={{ antialias: true, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.5, alpha: true }}>
+                    <CameraController isMobile={isMobile} />
 
-                <WhiteCuteRobot scale={isMobile ? 1.15 : 1.6} />
+                    {/* Signal when scene is ready */}
+                    <Startup onReady={() => setReady(true)} />
 
-                {/* Digital Data Flow Background */}
-                <DataParticles count={isMobile ? 60 : 150} />
+                    {/* Lighting - Clean Studio Lighting for White Ceramic */}
+                    <ambientLight intensity={0.4} />
+                    <pointLight position={[10, 10, 10]} intensity={1.0} color="#ffffff" />
+                    <spotLight position={[-5, 5, 5]} angle={0.5} penumbra={1} intensity={1.5} color="#ff007f" /> {/* Pink Rim Light */}
+                    <spotLight position={[5, -5, 5]} angle={0.5} penumbra={1} intensity={1.5} color="#00ffff" /> {/* Cyan Rim Light */}
+                    <pointLight position={[0, 2, 3]} intensity={0.8} color="#ffffff" /> {/* Front Fill */}
 
-                {/* Particles - Subtle Pink/White */}
-                <Sparkles count={isMobile ? 50 : 100} scale={10} size={2} speed={0.2} opacity={0.5} color="#ff007f" />
-                <Stars radius={100} depth={50} count={isMobile ? 1000 : 5000} factor={4} saturation={0} fade speed={1} />
+                    <WhiteCuteRobot scale={isMobile ? 1.15 : 1.6} />
 
-                <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2.5} far={4} color="#000000" />
-                <Environment preset="city" blur={0} background={false} />
-            </Canvas>
+                    {/* Digital Data Flow Background */}
+                    <DataParticles count={isMobile ? 60 : 150} />
+
+                    {/* Particles - Subtle Pink/White */}
+                    <Sparkles count={isMobile ? 50 : 100} scale={10} size={2} speed={0.2} opacity={0.5} color="#ff007f" />
+                    <Stars radius={100} depth={50} count={isMobile ? 1000 : 5000} factor={4} saturation={0} fade speed={1} />
+
+                    <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2.5} far={4} color="#000000" />
+                    <Environment preset="city" blur={0} background={false} />
+                </Canvas>
+            </div>
 
             <style jsx>{`
                 .three-wrapper {
@@ -351,8 +363,66 @@ export default function ThreeRobot() {
                     height: 100%;
                     min-height: 400px;
                     background: transparent;
+                    position: relative;
+                }
+                .canvas-container {
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    transition: opacity 1s ease-in-out;
+                }
+                .canvas-container.visible {
+                    opacity: 1;
+                }
+                .loader {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background: transparent;
+                    z-index: 10;
+                    transition: opacity 0.5s ease-out;
+                    pointer-events: none;
+                }
+                .loader.hidden {
+                    opacity: 0;
+                }
+                .spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    border-top-color: #ff007f;
+                    animation: spin 1s ease-in-out infinite;
+                    margin-bottom: 1rem;
+                }
+                p {
+                    color: #ff007f;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                    letter-spacing: 0.05em;
+                }
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
                 }
             `}</style>
         </div>
     );
+}
+
+// Helper to signal when everything is loaded
+function Startup({ onReady }: { onReady: () => void }) {
+    useEffect(() => {
+        // Small delay to ensure layout is stable
+        const timer = setTimeout(() => {
+            onReady();
+        }, 100);
+        return () => clearTimeout(timer);
+    }, [onReady]);
+    return null;
 }
