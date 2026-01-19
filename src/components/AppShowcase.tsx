@@ -20,7 +20,7 @@ export default function AppShowcase() {
                     </div>
                     <div className={styles.appInfo}>
                         <Image src="/images/jikgwang/logo.png" alt="Jikgwang Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem' }} quality={90} />
-                        <h3 className={styles.appName}>직광 (Jikgwang)</h3>
+                        <h3 className={styles.appName}>다광 (Dagwang)</h3>
                         <p className={styles.appDescription}>
                             소상공인, 중소기업 제품, 농어촌 직거래, 개인 행사 및 이벤트를 직접 등록하세요.<br />
                             크리에이터가 원하는 홍보를 직접 선택하여 지원하는<br />
