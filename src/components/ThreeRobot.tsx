@@ -198,7 +198,7 @@ function WhiteCuteRobot({ scale = 1 }: { scale?: number }) {
                     <StarAntenna />
 
                     {/* ANIMATED EYES */}
-                    <group position={[0, 0.12, 0.54]}>
+                    <group position={[0, 0.05, 0.54]}>
                         {/* HAPPY EXPRESSION (^^) */}
                         {expression === 'happy' && (
                             <>

@@ -46,7 +46,6 @@ export default function Contact() {
 
                 <div style={{ marginTop: '4rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
                     <p style={{ color: '#888', marginBottom: '0.5rem' }}>{t.contact.info.email}</p>
-                    <p style={{ color: '#888' }}>{t.contact.info.tel}</p>
                     <p style={{ color: '#888' }}>{t.contact.info.address}</p>
                 </div>
             </div>

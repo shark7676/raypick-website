@@ -87,8 +87,7 @@ export const translations = {
             },
             info: {
                 email: 'Email: contact@raypick.co.kr',
-                tel: 'Tel: 02-1234-5678',
-                address: 'Address: 서울특별시 강남구 테헤란로 123',
+                address: 'Address: 경남 창원시 진해구 연구단지1길 16 207-2호',
             },
         },
         footer: {
@@ -183,8 +182,7 @@ export const translations = {
             },
             info: {
                 email: 'Email: contact@raypick.co.kr',
-                tel: 'Tel: +82-2-1234-5678',
-                address: 'Address: 123 Teheran-ro, Gangnam-gu, Seoul, Korea',
+                address: 'Address: 207-2, 16, Yeongudanji 1-gil, Jinhae-gu, Changwon-si, Gyeongnam, Republic of Korea',
             },
         },
         footer: {
