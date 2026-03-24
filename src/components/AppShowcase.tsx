@@ -12,14 +12,14 @@ export default function AppShowcase() {
             <h2 className={styles.sectionTitle}>{t.appShowcase.title} <span className={styles.highlight}>{t.appShowcase.highlight}</span></h2>
             <div className={styles.appGrid}>
 
-                {/* App 1: Jikgwang */}
+                {/* App 1: Dagwang */}
                 <div className={styles.appCard}>
                     <div className={styles.appImageWrapper}>
-                        <Image src="/images/jikgwang/screenshot1.jpg" alt="Jikgwang Main" className={styles.appImage} width={300} height={600} quality={90} />
-                        <Image src="/images/jikgwang/screenshot2.jpg" alt="Jikgwang Detail" className={`${styles.appImage} ${styles.appImageSecondary}`} width={300} height={600} quality={90} />
+                        <Image src="/images/dagwang/screenshot1.jpg" alt="Dagwang Main" className={styles.appImage} width={300} height={600} quality={90} />
+                        <Image src="/images/dagwang/screenshot2.jpg" alt="Dagwang Detail" className={`${styles.appImage} ${styles.appImageSecondary}`} width={300} height={600} quality={90} />
                     </div>
                     <div className={styles.appInfo}>
-                        <Image src="/images/jikgwang/logo.png" alt="Jikgwang Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem' }} quality={90} />
+                        <Image src="/images/dagwang/logo.png" alt="Dagwang Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem' }} quality={90} />
                         <h3 className={styles.appName}>다광 (Dagwang)</h3>
                         <p className={styles.appDescription}>
                             소상공인, 중소기업 제품, 농어촌 직거래, 개인 행사 및 이벤트를 직접 등록하세요.<br />

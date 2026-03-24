@@ -16,8 +16,8 @@ export const translations = {
             title: '주요',
             highlight: '앱 포트폴리오',
             app1: {
-                name: '혁신적인 솔루션 A',
-                desc: '당신의 일상을 효율적으로 만들어주는 혁신적인 앱입니다. 직관적인 디자인과 끊김 없는 사용자 경험을 제공합니다.',
+                name: '다광 (Dagwang)',
+                desc: '소상공인, 중소기업 제품, 농어촌 직거래, 개인 행사 및 이벤트를 직접 등록하세요. 크리에이터가 지원하는 광고/홍보 연결 플랫폼입니다.',
             },
             app2: {
                 name: '데이터 분석 B',
@@ -111,8 +111,8 @@ export const translations = {
             title: 'Our',
             highlight: 'Apps',
             app1: {
-                name: 'Innovative Solution A',
-                desc: 'A revolutionary app designed to streamline your daily workflow. Experience seamless integration and intuitive design.',
+                name: 'Dagwang',
+                desc: 'Register small business products, local trade, and personal events. An advertising connection platform supported by creators.',
             },
             app2: {
                 name: 'Data Analytics B',
