@@ -2,50 +2,70 @@
 
 import Image from 'next/image';
 import { useLanguage } from '../context/LanguageContext';
+import { apps } from '../data/apps';
+import Reveal from './Reveal';
 import styles from '../app/page.module.css';
 
 export default function AppShowcase() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
 
     return (
         <section className={styles.showcaseSection}>
-            <h2 className={styles.sectionTitle}>{t.appShowcase.title} <span className={styles.highlight}>{t.appShowcase.highlight}</span></h2>
+            <Reveal>
+                <p className={styles.eyebrow}>PORTFOLIO</p>
+                <h2 className={styles.sectionTitle}>
+                    {t.appShowcase.title} <span className={styles.highlight}>{t.appShowcase.highlight}</span>
+                </h2>
+                <p className={styles.sectionSubtitle}>{t.appShowcase.subtitle}</p>
+            </Reveal>
+
             <div className={styles.appGrid}>
-
-                {/* App 1: Jikgwang */}
-                <div className={styles.appCard}>
-                    <div className={styles.appImageWrapper}>
-                        <Image src="/images/jikgwang/screenshot1.jpg" alt="Jikgwang Main" className={styles.appImage} width={300} height={600} quality={90} />
-                        <Image src="/images/jikgwang/screenshot2.jpg" alt="Jikgwang Detail" className={`${styles.appImage} ${styles.appImageSecondary}`} width={300} height={600} quality={90} />
-                    </div>
-                    <div className={styles.appInfo}>
-                        <Image src="/images/jikgwang/logo.png" alt="Jikgwang Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem' }} quality={90} />
-                        <h3 className={styles.appName}>다광 (Dagwang)</h3>
-                        <p className={styles.appDescription}>
-                            소상공인, 중소기업 제품, 농어촌 직거래, 개인 행사 및 이벤트를 직접 등록하세요.<br />
-                            크리에이터가 원하는 홍보를 직접 선택하여 지원하는<br />
-                            <strong>광고/홍보 연결 플랫폼</strong>입니다.
-                        </p>
-                    </div>
-                </div>
-
-                {/* App 2: Cosync */}
-                <div className={styles.appCard}>
-                    <div className={styles.appImageWrapper}>
-                        <Image src="/images/cosync/screenshot1.jpg" alt="Cosync Main" className={styles.appImage} width={300} height={600} quality={90} />
-                        <Image src="/images/cosync/screenshot2.jpg" alt="Cosync Detail" className={styles.appImage} width={300} height={600} quality={90} />
-                    </div>
-                    <div className={styles.appInfo}>
-                        <Image src="/images/cosync/logo.png" alt="Cosync Logo" width={80} height={80} style={{ height: 'auto', marginBottom: '1rem', borderRadius: '20px' }} quality={90} />
-                        <h3 className={styles.appName}>Cosync</h3>
-                        <p className={styles.appDescription}>
-                            NASA의 실시간 우주 데이터를 기반으로 점성술과<br />
-                            동양의 명리학, 오행을 융합하여 분석합니다.<br />
-                            당신의 <strong>출생 기운과 현재의 기운</strong>을 설명해주는 앱입니다.
-                        </p>
-                    </div>
-                </div>
-
+                {apps.map((app, index) => (
+                    <Reveal key={app.slug} delay={index * 120}>
+                        <article className={styles.appCard}>
+                            <div className={styles.appImageWrapper}>
+                                <span
+                                    className={`${styles.statusBadge} ${app.status === 'live' ? styles.badgeLive : styles.badgeComing}`}
+                                >
+                                    {app.status === 'live' ? t.appShowcase.live : t.appShowcase.comingSoon}
+                                </span>
+                                <Image
+                                    src={app.images[0]}
+                                    alt={`${app.name[language]} screen 1`}
+                                    className={styles.appImage}
+                                    width={300}
+                                    height={600}
+                                    quality={90}
+                                    unoptimized={app.demo}
+                                />
+                                <Image
+                                    src={app.images[1]}
+                                    alt={`${app.name[language]} screen 2`}
+                                    className={`${styles.appImage} ${styles.appImageSecondary}`}
+                                    width={300}
+                                    height={600}
+                                    quality={90}
+                                    unoptimized={app.demo}
+                                />
+                            </div>
+                            <div className={styles.appInfo}>
+                                <Image
+                                    src={app.logo}
+                                    alt={`${app.name[language]} logo`}
+                                    width={56}
+                                    height={56}
+                                    className={styles.appLogo}
+                                    style={app.roundedLogo ? { borderRadius: '14px' } : undefined}
+                                    quality={90}
+                                    unoptimized={app.demo}
+                                />
+                                <h3 className={styles.appName}>{app.name[language]}</h3>
+                                <p className={styles.appTagline}>{app.tagline[language]}</p>
+                                <p className={styles.appDescription}>{app.description[language]}</p>
+                            </div>
+                        </article>
+                    </Reveal>
+                ))}
             </div>
         </section>
     );

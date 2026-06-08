@@ -1,41 +1,43 @@
 'use client';
 
 import { useLanguage } from '../../context/LanguageContext';
+import Reveal from '../../components/Reveal';
 import styles from '../page.module.css';
 
 export default function Services() {
     const { t } = useLanguage();
 
+    const pillars = [
+        { num: '01', data: t.services.appDev },
+        { num: '02', data: t.services.youtube },
+    ];
+
     return (
         <main className={styles.mainContainer}>
-            <div style={{ padding: '8rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
-                <h1 className={styles.title} style={{ textAlign: 'center' }}>{t.services.title} <span className={styles.highlight}>{t.services.highlight}</span></h1>
+            <div className={styles.subPage}>
+                <Reveal>
+                    <p className={styles.eyebrow}>SERVICES</p>
+                    <h1 className={styles.pageTitle}>
+                        {t.services.title} <span className={styles.highlight}>{t.services.highlight}</span>
+                    </h1>
+                </Reveal>
 
-                {/* App Development */}
-                <section style={{ marginBottom: '6rem' }}>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', borderBottom: '2px solid var(--primary)', display: 'inline-block' }}>{t.services.appDev.title}</h2>
-                    <p className={styles.description}>
-                        {t.services.appDev.desc}
-                    </p>
-                    <ul className={styles.serviceList} style={{ marginTop: '2rem' }}>
-                        {t.services.appDev.list.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}
-                    </ul>
-                </section>
-
-                {/* YouTube Production */}
-                <section>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', borderBottom: '2px solid var(--primary)', display: 'inline-block' }}>{t.services.youtube.title}</h2>
-                    <p className={styles.description}>
-                        {t.services.youtube.desc}
-                    </p>
-                    <ul className={styles.serviceList} style={{ marginTop: '2rem' }}>
-                        {t.services.youtube.list.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}
-                    </ul>
-                </section>
+                <div className={styles.pillarGrid}>
+                    {pillars.map((pillar, i) => (
+                        <Reveal key={pillar.num} delay={i * 120}>
+                            <section className={styles.pillarCard}>
+                                <span className={styles.pillarNum}>{pillar.num}</span>
+                                <h2 className={styles.pillarTitle}>{pillar.data.title}</h2>
+                                <p className={styles.pillarDesc}>{pillar.data.desc}</p>
+                                <ul className={styles.serviceList}>
+                                    {pillar.data.list.map((item, index) => (
+                                        <li key={index}>{item}</li>
+                                    ))}
+                                </ul>
+                            </section>
+                        </Reveal>
+                    ))}
+                </div>
             </div>
         </main>
     );

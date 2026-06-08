@@ -1,0 +1,62 @@
+<svg width="300" height="600" viewBox="0 0 300 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gscr" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#141417"/><stop offset="1" stop-color="#0b0b0e"/>
+    </linearGradient>
+    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e7cd97"/><stop offset="1" stop-color="#c9a86a"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="600" fill="url(#gscr)"/>
+  <text x="22" y="34" fill="#ededf0" font-family="sans-serif" font-size="13" font-weight="600">9:41</text>
+  <rect x="244" y="24" width="34" height="12" rx="3" stroke="#ededf0" stroke-opacity="0.5"/>
+  <!-- header -->
+  <text x="22" y="78" fill="#ededf0" font-family="sans-serif" font-size="24" font-weight="800">다광</text>
+  <text x="22" y="98" fill="#8b909c" font-family="sans-serif" font-size="11">광고주 · 크리에이터 캠페인</text>
+  <circle cx="270" cy="72" r="16" fill="#ffffff" fill-opacity="0.06"/>
+  <circle cx="270" cy="72" r="6" stroke="url(#gg)" stroke-width="2"/>
+  <!-- tabs -->
+  <rect x="22" y="116" width="70" height="28" rx="14" fill="url(#gg)"/>
+  <text x="57" y="134" fill="#0b0b0e" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle">전체</text>
+  <text x="118" y="134" fill="#8b909c" font-family="sans-serif" font-size="11">제품</text>
+  <text x="166" y="134" fill="#8b909c" font-family="sans-serif" font-size="11">행사</text>
+  <text x="214" y="134" fill="#8b909c" font-family="sans-serif" font-size="11">직거래</text>
+  <!-- campaign cards -->
+  <g font-family="sans-serif">
+    <!-- card 1 -->
+    <rect x="22" y="160" width="256" height="118" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#c9a86a" stroke-opacity="0.3"/>
+    <rect x="36" y="176" width="52" height="52" rx="10" fill="#3a3320"/>
+    <rect x="100" y="178" width="58" height="16" rx="8" fill="rgba(201,168,106,0.18)"/>
+    <text x="129" y="190" fill="#e7cd97" font-size="9" font-weight="700" text-anchor="middle">제품 홍보</text>
+    <text x="100" y="212" fill="#ededf0" font-size="14" font-weight="700">수제 도자기 브랜드</text>
+    <text x="100" y="230" fill="#8b909c" font-size="10">리뷰 영상 · 숏폼</text>
+    <text x="36" y="262" fill="#8b909c" font-size="10">지원 12명</text>
+    <rect x="170" y="246" width="92" height="22" rx="11" fill="url(#gg)"/>
+    <text x="216" y="261" fill="#0b0b0e" font-size="10" font-weight="800" text-anchor="middle">지원하기</text>
+
+    <!-- card 2 -->
+    <rect x="22" y="288" width="256" height="118" rx="14" fill="#ffffff" fill-opacity="0.03"/>
+    <rect x="36" y="304" width="52" height="52" rx="10" fill="#2a2f3a"/>
+    <rect x="100" y="306" width="50" height="16" rx="8" fill="rgba(201,168,106,0.18)"/>
+    <text x="125" y="318" fill="#e7cd97" font-size="9" font-weight="700" text-anchor="middle">행사</text>
+    <text x="100" y="340" fill="#ededf0" font-size="14" font-weight="700">지역 플리마켓</text>
+    <text x="100" y="358" fill="#8b909c" font-size="10">현장 스케치 · 라이브</text>
+    <text x="36" y="390" fill="#8b909c" font-size="10">지원 8명</text>
+    <rect x="170" y="374" width="92" height="22" rx="11" fill="rgba(201,168,106,0.15)" stroke="#c9a86a" stroke-opacity="0.4"/>
+    <text x="216" y="389" fill="#e7cd97" font-size="10" font-weight="700" text-anchor="middle">지원하기</text>
+
+    <!-- card 3 -->
+    <rect x="22" y="416" width="256" height="100" rx="14" fill="#ffffff" fill-opacity="0.03"/>
+    <rect x="36" y="432" width="52" height="52" rx="10" fill="#23332a"/>
+    <rect x="100" y="434" width="64" height="16" rx="8" fill="rgba(201,168,106,0.18)"/>
+    <text x="132" y="446" fill="#e7cd97" font-size="9" font-weight="700" text-anchor="middle">농어촌 직거래</text>
+    <text x="100" y="468" fill="#ededf0" font-size="14" font-weight="700">제철 과일 직판</text>
+    <text x="100" y="486" fill="#8b909c" font-size="10">언박싱 · 시식 콘텐츠</text>
+  </g>
+  <!-- bottom nav -->
+  <rect x="0" y="540" width="300" height="60" fill="#0e0e11"/>
+  <rect x="0" y="540" width="300" height="1" fill="#ffffff" fill-opacity="0.08"/>
+  <circle cx="60" cy="572" r="4" fill="url(#gg)"/>
+  <circle cx="150" cy="572" r="4" fill="#5a5e66"/>
+  <circle cx="240" cy="572" r="4" fill="#5a5e66"/>
+</svg>

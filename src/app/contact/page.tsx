@@ -1,6 +1,7 @@
 'use client';
 
 import { useLanguage } from '../../context/LanguageContext';
+import Reveal from '../../components/Reveal';
 import styles from '../page.module.css';
 
 export default function Contact() {
@@ -8,46 +9,57 @@ export default function Contact() {
 
     return (
         <main className={styles.mainContainer}>
-            <div style={{ padding: '8rem 2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
-                <h1 className={styles.title} style={{ textAlign: 'center' }}>{t.contact.title} <span className={styles.highlight}>{t.contact.highlight}</span></h1>
-                <p className={styles.description} style={{ textAlign: 'center', margin: '0 auto 4rem auto' }}>
-                    {t.contact.desc}
-                </p>
+            <div className={styles.subPage} style={{ maxWidth: '760px' }}>
+                <Reveal>
+                    <p className={styles.eyebrow}>CONTACT</p>
+                    <h1 className={styles.pageTitle}>
+                        {t.contact.title} <span className={styles.highlight}>{t.contact.highlight}</span>
+                    </h1>
+                    <p className={styles.contactDesc}>{t.contact.desc}</p>
+                </Reveal>
 
-                <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                    <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                        <label style={{ color: '#fff', fontWeight: 'bold' }}>{t.contact.form.name}</label>
-                        <input type="text" placeholder={t.contact.form.placeholderName} style={{
-                            padding: '1rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)',
-                            background: 'rgba(255,255,255,0.05)', color: 'white'
-                        }} />
+                <Reveal delay={100}>
+                    <form className={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
+                        <div className={styles.formField}>
+                            <label className={styles.formLabel}>{t.contact.form.name}</label>
+                            <input
+                                type="text"
+                                className={styles.formInput}
+                                placeholder={t.contact.form.placeholderName}
+                            />
+                        </div>
+
+                        <div className={styles.formField}>
+                            <label className={styles.formLabel}>{t.contact.form.email}</label>
+                            <input
+                                type="email"
+                                className={styles.formInput}
+                                placeholder={t.contact.form.placeholderEmail}
+                            />
+                        </div>
+
+                        <div className={styles.formField}>
+                            <label className={styles.formLabel}>{t.contact.form.message}</label>
+                            <textarea
+                                rows={6}
+                                className={styles.formInput}
+                                style={{ resize: 'vertical' }}
+                                placeholder={t.contact.form.placeholderMessage}
+                            />
+                        </div>
+
+                        <button type="submit" className={styles.ctaButton} style={{ width: '100%', justifyContent: 'center' }}>
+                            {t.contact.form.submit}
+                        </button>
+                    </form>
+                </Reveal>
+
+                <Reveal delay={160}>
+                    <div className={styles.contactInfo}>
+                        <p>{t.contact.info.email}</p>
+                        <p>{t.contact.info.address}</p>
                     </div>
-
-                    <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                        <label style={{ color: '#fff', fontWeight: 'bold' }}>{t.contact.form.email}</label>
-                        <input type="email" placeholder={t.contact.form.placeholderEmail} style={{
-                            padding: '1rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)',
-                            background: 'rgba(255,255,255,0.05)', color: 'white'
-                        }} />
-                    </div>
-
-                    <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                        <label style={{ color: '#fff', fontWeight: 'bold' }}>{t.contact.form.message}</label>
-                        <textarea rows={6} placeholder={t.contact.form.placeholderMessage} style={{
-                            padding: '1rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)',
-                            background: 'rgba(255,255,255,0.05)', color: 'white', resize: 'vertical'
-                        }}></textarea>
-                    </div>
-
-                    <button type="button" className={styles.ctaButton} style={{ marginTop: '1rem', width: '100%' }}>
-                        {t.contact.form.submit}
-                    </button>
-                </form>
-
-                <div style={{ marginTop: '4rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
-                    <p style={{ color: '#888', marginBottom: '0.5rem' }}>{t.contact.info.email}</p>
-                    <p style={{ color: '#888' }}>{t.contact.info.address}</p>
-                </div>
+                </Reveal>
             </div>
         </main>
     );
