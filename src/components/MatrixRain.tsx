@@ -54,10 +54,13 @@ export default function MatrixRain() {
 
         const makeRow = (): Row => {
             const text = SNIPPETS[(Math.random() * SNIPPETS.length) | 0];
+            const mobile = w < 768;
             return {
                 text,
-                // Right half — toward the code-editor side
-                x: Math.round(w * 0.5 + Math.random() * w * 0.42),
+                // Desktop: right half (code-editor side). Mobile: spread across full width.
+                x: mobile
+                    ? Math.round(Math.random() * w * 0.7)
+                    : Math.round(w * 0.5 + Math.random() * w * 0.42),
                 alpha: 0.78 + Math.random() * 0.22,
                 bright: Math.random() > 0.82,
             };
