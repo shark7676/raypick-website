@@ -714,15 +714,15 @@
     /* Mobile: keep the code rain visible (it fades toward the top, so the
        headline stays readable); veil mainly protects the mid text/CTA area */
     .heroMatrix {
-        opacity: 0.78;
+        opacity: 1;
     }
 
     .heroVeil {
         background: linear-gradient(
             180deg,
-            rgba(8, 8, 10, 0.62) 0%,
-            rgba(8, 8, 10, 0.34) 45%,
-            rgba(8, 8, 10, 0.24) 100%
+            rgba(8, 8, 10, 0.66) 0%,
+            rgba(8, 8, 10, 0.3) 45%,
+            rgba(8, 8, 10, 0.2) 100%
         );
     }
 

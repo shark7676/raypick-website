@@ -30,8 +30,8 @@ const SNIPPETS = [
     '',
 ];
 
-// Glyphs used for the subtle "glitch" flicker
-const GLYPHS = 'アイウエオカキクケコサシスセソタチツ0123456789{}[]<>/=;+*$'.split('');
+// Glyphs used for the subtle "glitch" flicker — code characters only (no katakana)
+const GLYPHS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}[]()<>/=;:+-*.$_'.split('');
 
 export default function MatrixRain() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -92,7 +92,10 @@ export default function MatrixRain() {
             ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
             ctx.textBaseline = 'top';
 
-            const glow = w < 768 ? 4 : 7;
+            const mobile = w < 768;
+            const glow = mobile ? 4 : 7;
+            // Mobile keeps a higher brightness floor so the visible area isn't washed out
+            const floor = mobile ? 0.5 : 0;
 
             // Subtle cinematic glitch: swap a couple of glyphs occasionally
             if (frame % 5 === 0) {
@@ -114,7 +117,7 @@ export default function MatrixRain() {
 
                 // Bright as it enters at the bottom, fading as it rises (trail)
                 const p = Math.max(0, Math.min(1, y / h));
-                const fade = p * p * (3 - 2 * p); // smoothstep
+                const fade = floor + (1 - floor) * (p * p * (3 - 2 * p)); // smoothstep + floor
                 const flick = 0.88 + Math.random() * 0.12;
                 const a = r.alpha * fade * flick;
                 if (a <= 0.02) continue;
