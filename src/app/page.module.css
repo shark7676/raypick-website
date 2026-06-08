@@ -62,12 +62,12 @@
     background: #08080a;
 }
 
-/* Matrix code rain (upward, bright green, subtle) */
+/* Matrix code rain (upward, bright green, cinematic) */
 .heroMatrix {
     position: absolute;
     inset: 0;
     z-index: 0;
-    opacity: 0.9;
+    opacity: 1;
     pointer-events: none;
 }
 
@@ -711,18 +711,18 @@
         min-height: auto;
     }
 
-    /* Mobile: keep the code rain (full-width, fainter) with a stronger veil
-       so the headline stays readable over it */
+    /* Mobile: keep the code rain visible (it fades toward the top, so the
+       headline stays readable); veil mainly protects the mid text/CTA area */
     .heroMatrix {
-        opacity: 0.42;
+        opacity: 0.78;
     }
 
     .heroVeil {
         background: linear-gradient(
             180deg,
-            rgba(8, 8, 10, 0.8) 0%,
-            rgba(8, 8, 10, 0.52) 42%,
-            rgba(8, 8, 10, 0.42) 100%
+            rgba(8, 8, 10, 0.62) 0%,
+            rgba(8, 8, 10, 0.34) 45%,
+            rgba(8, 8, 10, 0.24) 100%
         );
     }
 

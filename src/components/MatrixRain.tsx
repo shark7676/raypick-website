@@ -30,6 +30,9 @@ const SNIPPETS = [
     '',
 ];
 
+// Glyphs used for the subtle "glitch" flicker
+const GLYPHS = 'アイウエオカキクケコサシスセソタチツ0123456789{}[]<>/=;+*$'.split('');
+
 export default function MatrixRain() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -82,22 +85,49 @@ export default function MatrixRain() {
 
         setup();
 
-        const speed = 1.45; // px per frame
+        const speed = 1.5; // px per frame
+        let frame = 0;
         const draw = () => {
             ctx.clearRect(0, 0, w, h);
             ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
             ctx.textBaseline = 'top';
 
+            const glow = w < 768 ? 4 : 7;
+
+            // Subtle cinematic glitch: swap a couple of glyphs occasionally
+            if (frame % 5 === 0) {
+                for (let k = 0; k < 2; k++) {
+                    const r = rows[(Math.random() * rows.length) | 0];
+                    if (r && r.text.length > 2) {
+                        const ci = (Math.random() * r.text.length) | 0;
+                        const g = GLYPHS[(Math.random() * GLYPHS.length) | 0];
+                        r.text = r.text.slice(0, ci) + g + r.text.slice(ci + 1);
+                    }
+                }
+            }
+
             for (let i = 0; i < rows.length; i++) {
                 const r = rows[i];
                 if (!r.text) continue;
                 const y = i * lineHeight - offset;
-                // richer green; occasional brighter highlight line
+                if (y < -lineHeight || y > h) continue;
+
+                // Bright as it enters at the bottom, fading as it rises (trail)
+                const p = Math.max(0, Math.min(1, y / h));
+                const fade = p * p * (3 - 2 * p); // smoothstep
+                const flick = 0.88 + Math.random() * 0.12;
+                const a = r.alpha * fade * flick;
+                if (a <= 0.02) continue;
+
+                // Subtle neon glow (kept low so it doesn't blow out)
+                ctx.shadowColor = r.bright ? 'rgba(150, 255, 190, 0.45)' : 'rgba(50, 210, 120, 0.4)';
+                ctx.shadowBlur = glow;
                 ctx.fillStyle = r.bright
-                    ? `rgba(180, 255, 205, ${r.alpha})`
-                    : `rgba(57, 220, 122, ${r.alpha})`;
+                    ? `rgba(205, 255, 222, ${a})`
+                    : `rgba(70, 226, 132, ${a})`;
                 ctx.fillText(r.text, r.x, y);
             }
+            ctx.shadowBlur = 0;
 
             offset += speed;
             if (offset >= lineHeight) {
@@ -106,6 +136,7 @@ export default function MatrixRain() {
                 rows.push(makeRow());
             }
 
+            frame++;
             raf = requestAnimationFrame(draw);
         };
 
