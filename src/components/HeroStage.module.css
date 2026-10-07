@@ -438,6 +438,24 @@
   }
 }
 
+/* portrait tablets: the 3D logo moves to the top, so the text sits below it */
+@media (min-width: 761px) and (max-aspect-ratio: 11/10) {
+  .a {
+    justify-content: flex-end;
+    padding-top: 50vh;
+    padding-bottom: 170px;
+  }
+
+  .h1 {
+    font-size: clamp(44px, 8vw, 96px);
+  }
+
+  .fallback {
+    place-items: start center;
+    padding: 14vh 0 0;
+  }
+}
+
 @media (max-height: 700px) and (min-width: 761px) {
   .cue {
     display: none;

@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { scrollHome } from '../lib/scrollHome';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -11,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [light, setLight] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -46,7 +49,15 @@ export default function Navbar() {
 
   return (
     <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${light && !open ? styles.light : ''} ${open ? styles.isOpen : ''}`}>
-      <Link href="/" className={styles.brand} onClick={close} aria-label="Raypick">
+      <Link
+        href="/"
+        className={styles.brand}
+        onClick={(e) => {
+          close();
+          scrollHome(e, pathname);
+        }}
+        aria-label="Raypick"
+      >
         <Image className={styles.mark} src={light && !open ? '/brand/raypick-mark.svg' : '/brand/raypick-mark-light.svg'} alt="" width={31} height={26} unoptimized priority />
         <Image className={styles.word} src={light && !open ? '/brand/wordmark-navy.png' : '/brand/wordmark-light.png'} alt="RAYPICK" width={100} height={13} unoptimized priority />
       </Link>

@@ -21,13 +21,14 @@ Next.js 16.4 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretend
 ## 진행 상황
 - 2026-10-08: 설계 확정 → 구현 완료 (로컬). 대표 피드백 반영: 궤도 드래그 방향 수정, 궤도선을 흐르는 빛 점선으로 교체.
 - 검증: 빌드·타입·린트 통과 / 접근성·권장사항·SEO 100점 / 스토어·사이트 링크 8개 정상 / 모바일 가로 넘침 없음 / 3D 꺼진 기기 대체 화면 확인 / 실제 사이트용 부품 보안 경고 0건(Next 16.2.7→16.4.0).
-- 속도(Lighthouse 모바일, 느린 4G 가정): 첫 화면 3.2~3.3초(3D 없어도 같음), 실제 빠른 인터넷 0.26초. 배포 후 PageSpeed로 재확인 필요.
+- 속도(실제 사이트 raypick.co.kr, Lighthouse 모바일·느린 4G 가정): 첫 화면 **2.6~2.8초**(목표 3초 안 달성), 주요 글자 3.3~3.6초 / PC 첫 화면 0.5초. 접근성·권장사항·SEO 100점. (구글 PageSpeed API는 그날 무료 한도 초과로 같은 도구 Lighthouse로 측정)
 - 2026-10-08: 깃허브 main에 저장(커밋 9d3b0f8) → Vercel 자동 배포 → **raypick.co.kr 반영 완료, 대표 확인.**
 - 참고: main에 push하면 Vercel이 자동 배포함 (Vercel 프로젝트 `raypick`, `raypick-website` 둘 다 빌드됨).
 
 ## 다음 할 일
 - [x] 깃허브 저장 + 실제 사이트 배포 (2026-10-08)
 - 작업용 파일 `public/drafts/`(시안), `_assets/`(원본 자료), `로고.png`는 이 컴퓨터에만 둠 (.gitignore로 제외)
-- [ ] 영어 대표 이름 표기 확인 (`Sangkwon Shin`으로 임시 표기)
-- [ ] 하루요 진짜 앱 아이콘 나오면 `public/apps/haruyo/icon.webp` 교체
-- [ ] 배포 후 PageSpeed Insights로 실제 속도 확인
+- [x] 영어 대표 이름 `Sangkwon Shin` 확정 (2026-10-08 대표 확인)
+- [ ] 하루요 진짜 앱 아이콘 나오면 `public/apps/haruyo/icon.webp` 교체 (2026-10-08 확인: rehi 저장소 아이콘은 아직 Flutter 기본 아이콘 → 임시 파스텔 아이콘 유지)
+- [x] 배포 후 실제 사이트 속도 확인
+- 2026-10-08 추가: 로고(위·아래) 누르면 맨 위로 이동, 세로 태블릿에서 첫 화면 글자 배치 수정
