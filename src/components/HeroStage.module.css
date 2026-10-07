@@ -1,0 +1,445 @@
+.stage {
+  position: relative;
+  height: 340vh;
+  background: var(--night);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: pan-y;
+}
+
+.canvas:global(.hovering) {
+  cursor: pointer;
+}
+
+.canvas:global(.dragging) {
+  cursor: grabbing;
+}
+
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center end;
+  padding-right: 10vw;
+}
+
+.fallback img {
+  width: min(38vw, 420px);
+  height: auto;
+  filter: drop-shadow(0 0 60px rgba(58, 124, 240, 0.55));
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
+}
+
+/* ---------- orbit labels (created by the 3D scene) ---------- */
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.labels :global(.orbit-label) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.labels :global(.orbit-label b) {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
+}
+
+.labels :global(.orbit-label span) {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid rgba(80, 220, 140, 0.3);
+  background: rgba(6, 10, 22, 0.55);
+  color: #a6f0c0;
+  backdrop-filter: blur(8px);
+}
+
+.labels :global(.orbit-label[data-soon="true"] span) {
+  color: #ffd28a;
+  border-color: rgba(255, 190, 90, 0.3);
+}
+
+/* ---------- scene A ---------- */
+.a {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 110px var(--gutter) 150px;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.a a {
+  pointer-events: auto;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sky);
+  box-shadow: 0 0 0 4px rgba(140, 198, 255, 0.12), 0 0 18px var(--sky);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    box-shadow: 0 0 0 8px rgba(140, 198, 255, 0), 0 0 26px var(--sky);
+  }
+}
+
+.h1 {
+  margin-top: 28px;
+  font-weight: 800;
+  font-size: clamp(44px, 7.4vw, 118px);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+/* the English headline is longer — keep it clear of the logo */
+:global(html:lang(en)) .h1 {
+  font-size: clamp(40px, 6.1vw, 100px);
+}
+
+.ln {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.ln > span {
+  display: inline-block;
+  animation: rise 1.3s var(--ease) 0.1s both;
+}
+
+.ln:nth-child(2) > span {
+  animation-delay: 0.22s;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(110%);
+  }
+}
+
+.glow {
+  background: linear-gradient(100deg, #fff 0%, #cfe3ff 35%, #7fb6ff 70%, #3a7cf0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* plain CSS so the text shows on first paint, before any script runs */
+.fade {
+  animation: fadeUp 1.1s var(--ease) 0.3s both;
+}
+
+.d1 {
+  animation-delay: 0.4s;
+}
+
+.d2 {
+  animation-delay: 0.52s;
+}
+
+.d3 {
+  animation-delay: 0.66s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.sub {
+  margin-top: 30px;
+  max-width: 31em;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.75;
+  color: var(--night-mute);
+  white-space: pre-line;
+}
+
+.cta {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.proof {
+  position: absolute;
+  left: var(--gutter);
+  right: clamp(20px, 4vw, 56px);
+  bottom: 38px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.stats {
+  display: flex;
+  gap: clamp(22px, 4vw, 64px);
+}
+
+.stat b {
+  display: block;
+  font-family: var(--font-wide);
+  font-weight: 400;
+  font-size: clamp(24px, 2.4vw, 36px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--night-mute);
+}
+
+.stores {
+  display: flex;
+  gap: 10px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--night-line);
+  font-size: 12px;
+  background: rgba(10, 18, 40, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.cue {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-wide);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--night-mute);
+}
+
+.cue i {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(var(--sky), transparent);
+  transform-origin: top;
+  animation: drop 2s ease-in-out infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* ---------- scene B ---------- */
+.b {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 120px 20px clamp(28px, 6vh, 64px);
+  background: linear-gradient(transparent, rgba(3, 5, 11, 0.8) 42%);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.h2 {
+  margin-top: 16px;
+  font-weight: 800;
+  font-size: clamp(34px, 4.6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+
+.h2 em {
+  font-style: normal;
+  background: linear-gradient(100deg, #fff, #9ccaff 60%, #3a7cf0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subB {
+  margin-top: 18px;
+  max-width: 38em;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.7;
+  color: var(--night-mute);
+  white-space: pre-line;
+}
+
+.hint {
+  margin-top: 18px;
+  font-family: var(--font-wide);
+  font-size: 9.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--sky);
+  opacity: 0.8;
+}
+
+.iconRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 36px;
+  pointer-events: auto;
+}
+
+.iconRow button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.iconRow img {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px -10px rgba(58, 124, 240, 0.6);
+}
+
+/* light switching on — blends into the apps section below */
+.flash {
+  --f: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 50% 38%,
+    #ffffff 0%,
+    var(--day) calc(var(--f) * 90%),
+    rgba(200, 222, 255, 0.6) calc(var(--f) * 100% + 12%),
+    rgba(58, 124, 240, 0) calc(var(--f) * 130% + 38%)
+  );
+}
+
+@media (max-width: 760px) {
+  .stage {
+    height: 300vh;
+  }
+
+  .fallback {
+    place-items: start center;
+    padding: 17vh 0 0;
+  }
+
+  .fallback img {
+    width: 44vw;
+  }
+
+  .a {
+    justify-content: flex-end;
+    padding-top: 52vh;
+    padding-bottom: 150px;
+  }
+
+  .h1 {
+    font-size: clamp(40px, 11vw, 64px);
+  }
+
+  .sub br {
+    display: none;
+  }
+
+  .proof {
+    bottom: 26px;
+  }
+
+  .stats {
+    gap: 22px;
+  }
+
+  .stores,
+  .cue {
+    display: none;
+  }
+
+  .labels :global(.orbit-label b) {
+    font-size: 12px;
+  }
+
+  .labels :global(.orbit-label span) {
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 761px) {
+  .cue {
+    display: none;
+  }
+}

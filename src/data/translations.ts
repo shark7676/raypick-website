@@ -1,198 +1,183 @@
-export const translations = {
-    ko: {
-        nav: {
-            home: '홈',
-            about: '회사소개',
-            services: '서비스',
-            contact: '문의하기',
-        },
-        hero: {
-            eyebrow: 'APP · MEDIA · ORIGINAL CONTENT',
-            headline: '상상을 현실로,\n우리가 정의하는',
-            headlineAccent: '미래.',
-            sub: 'Raypick은 독창적인 앱과 오리지널 미디어로\n디지털 경험을 새롭게 정의하는 크리에이티브 그룹입니다.',
-            cta: '서비스 둘러보기',
-            code: {
-                file: 'raypick.tsx',
-                status: 'AI 작성 중',
-                steps: ['요구사항 분석', 'UI 컴포넌트 생성', 'API 연결 구성', '최적화 · 배포'],
-            },
-        },
-        appShowcase: {
-            title: '주요',
-            highlight: '앱 포트폴리오',
-            subtitle: '일상을 바꾸는 Raypick의 앱. 새로운 앱이 계속 추가됩니다.',
-            comingSoon: '출시 예정',
-            live: '서비스 중',
-        },
-        serviceSection: {
-            title: '자체 미디어 ·',
-            highlight: '오리지널 콘텐츠',
-            desc: '우리는 의뢰를 받지 않고, 우리의 의도대로 콘텐츠를 만드는 크리에이티브 그룹입니다.\n자체 유튜브 채널 운영과 라이브 방송, 오리지널 영상 제작까지\n기획부터 촬영·편집의 전 과정을 직접 주도합니다.',
-            list: [
-                '자체 유튜브 채널 운영 및 라이브 방송',
-                '오리지널 콘텐츠 기획 · 제작',
-                '4K 시네마틱 촬영',
-                '고급 편집 및 모션 그래픽',
-            ],
-        },
-        about: {
-            title: '회사',
-            highlight: '소개',
-            intro: 'Raypick은 기술과 예술의 경계를 허무는 크리에이티브 그룹입니다.\n혁신적인 앱 개발 기술과 감각적인 미디어 제작 능력을 결합하여,\n고객의 디지털 경험을 한 차원 높여드립니다.',
-            vision: {
-                title: 'Vision',
-                desc: '누구나 쉽고 즐겁게 디지털 세상을\n누릴 수 있는 미래를 만듭니다.',
-            },
-            mission: {
-                title: 'Mission',
-                desc: '최고의 기술력과 창의력으로\n상상을 현실로 구현합니다.',
-            },
-        },
-        services: {
-            title: '제공',
-            highlight: '서비스',
-            appDev: {
-                title: 'App Development',
-                desc: '사용자 중심의 UI/UX 디자인과 견고한 백엔드 시스템을 기반으로,\n비즈니스 목표를 달성하는 최적의 모바일 애플리케이션을 개발합니다.',
-                list: [
-                    'iOS / Android 네이티브 앱 개발',
-                    'Flutter / React Native 크로스 플랫폼 개발',
-                    '앱 유지보수 및 고도화',
-                    'UI/UX 기획 및 디자인',
-                ],
-            },
-            youtube: {
-                title: 'Media Production',
-                desc: '트렌드를 쫓기보다 우리가 진정으로 즐길 수 있는 콘텐츠를 만듭니다.\n자체 유튜브 채널 운영과 라이브 방송, 오리지널 영상 제작까지\n세상에 없던 Raypick만의 미디어를 선보입니다.',
-                list: [
-                    '자체 유튜브 채널 운영 및 성장 전략',
-                    '실시간 라이브 방송 기획 · 송출',
-                    '오리지널 콘텐츠 기획 및 제작',
-                    '4K 촬영 · 종합 편집 · 색보정 · 모션 그래픽',
-                ],
-            },
-        },
-        contact: {
-            title: '문의',
-            highlight: '하기',
-            desc: '프로젝트 의뢰나 궁금한 점이 있으시면 언제든 연락 주세요. 빠르게 답변 드리겠습니다.',
-            form: {
-                name: '이름 / 회사명',
-                email: '이메일',
-                message: '문의 내용',
-                placeholderName: '입력해주세요',
-                placeholderEmail: 'example@raypick.co.kr',
-                placeholderMessage: '프로젝트 내용이나 문의사항을 자유롭게 적어주세요.',
-                submit: '문의 보내기',
-            },
-            info: {
-                email: 'Email: contact@raypick.co.kr',
-                address: 'Address: 경남 창원시 진해구 연구단지1길 16 207-2호',
-            },
-        },
-        footer: {
-            tagline: '상상을 현실로, 우리가 정의하는 미래.',
-            rights: '© 2026 Raypick. All rights reserved.',
-        },
-    },
-    en: {
-        nav: {
-            home: 'Home',
-            about: 'About',
-            services: 'Services',
-            contact: 'Contact',
-        },
-        hero: {
-            eyebrow: 'APP · MEDIA · ORIGINAL CONTENT',
-            headline: 'Turning imagination\ninto the future',
-            headlineAccent: 'we define.',
-            sub: 'Raypick is a creative group redefining digital experience\nthrough original apps and in-house media.',
-            cta: 'Explore Services',
-            code: {
-                file: 'raypick.tsx',
-                status: 'AI generating',
-                steps: ['Analyzing requirements', 'Generating UI', 'Wiring APIs', 'Optimize & deploy'],
-            },
-        },
-        appShowcase: {
-            title: 'Our',
-            highlight: 'App Portfolio',
-            subtitle: 'Apps that reshape everyday life — and we keep adding more.',
-            comingSoon: 'Coming Soon',
-            live: 'Live',
-        },
-        serviceSection: {
-            title: 'In-house Media ·',
-            highlight: 'Original Content',
-            desc: 'We are a creative group that produces content on our own terms, not on commission.\nFrom running our own YouTube channel and live broadcasts to original video production,\nwe lead the entire process — planning, filming, and editing.',
-            list: [
-                'In-house YouTube channel & live broadcasting',
-                'Original content planning & production',
-                '4K cinematic filming',
-                'Advanced editing & motion graphics',
-            ],
-        },
-        about: {
-            title: 'About',
-            highlight: 'Us',
-            intro: 'Raypick is a creative group that blurs the boundaries between technology and art. We combine innovative app development with refined media production to elevate your digital experience.',
-            vision: {
-                title: 'Vision',
-                desc: 'Creating a future where everyone can easily and happily enjoy the digital world.',
-            },
-            mission: {
-                title: 'Mission',
-                desc: 'Realizing imagination with the best technology and creativity.',
-            },
-        },
-        services: {
-            title: 'Our',
-            highlight: 'Services',
-            appDev: {
-                title: 'App Development',
-                desc: 'Based on user-centric UI/UX design and robust backend systems, we build mobile applications that achieve real business goals.',
-                list: [
-                    'iOS / Android Native App Development',
-                    'Flutter / React Native Cross-Platform Development',
-                    'App Maintenance and Advancement',
-                    'UI/UX Planning and Design',
-                ],
-            },
-            youtube: {
-                title: 'Media Production',
-                desc: 'Rather than chasing trends, we create content we genuinely enjoy. From our own YouTube channel and live broadcasts to original video production, we present media that exists nowhere else.',
-                list: [
-                    'In-house YouTube channel & growth strategy',
-                    'Live broadcast planning & streaming',
-                    'Original content planning & production',
-                    '4K filming · full editing · color grading · motion graphics',
-                ],
-            },
-        },
-        contact: {
-            title: 'Contact',
-            highlight: 'Us',
-            desc: 'If you have any project requests or questions, please feel free to contact us. We will respond quickly.',
-            form: {
-                name: 'Name / Company',
-                email: 'Email',
-                message: 'Message',
-                placeholderName: 'Enter your name',
-                placeholderEmail: 'example@raypick.co.kr',
-                placeholderMessage: 'Please feel free to write down your project details or inquiries.',
-                submit: 'Send Inquiry',
-            },
-            info: {
-                email: 'Email: contact@raypick.co.kr',
-                address: 'Address: 207-2, 16, Yeongudanji 1-gil, Jinhae-gu, Changwon-si, Gyeongnam, Republic of Korea',
-            },
-        },
-        footer: {
-            tagline: 'Turning Imagination into Reality, The Future We Define.',
-            rights: '© 2026 Raypick. All rights reserved.',
-        },
-    },
+export type Language = "ko" | "en";
+
+export const company = {
+  email: "admin@raypick.co.kr",
+  bizNumber: "781-86-04185",
 };
 
-export type Language = 'ko' | 'en';
+const ko = {
+  meta: {
+    title: "Raypick — 일상을 비추는 앱을 만듭니다",
+    description:
+      "레이픽은 앱을 직접 기획·디자인·개발해 출시하는 회사입니다. BEATRAY, Gallory, 이것좀을 Google Play와 App Store에서 만나보세요.",
+  },
+  nav: { apps: "앱", company: "회사", contact: "문의", menu: "메뉴 열기", close: "메뉴 닫기", lang: "English" },
+  hero: {
+    eyebrow: "Raypick Inc. — App Studio",
+    line1: "일상을 비추는",
+    line2: "앱을 만듭니다.",
+    sub: "기획부터 디자인, 개발, 출시까지 직접 합니다.\n지금 Google Play와 App Store에서 레이픽의 앱을 만나보세요.",
+    ctaApps: "앱 둘러보기",
+    ctaContact: "협업 문의",
+    statLive: "출시된 앱",
+    statComing: "출시 예정",
+    statInhouseValue: "In-house",
+    statInhouse: "기획 · 디자인 · 개발",
+    scroll: "SCROLL",
+  },
+  orbit: {
+    eyebrow: "One studio · Five worlds",
+    title1: "하나의 스튜디오,",
+    title2: "다섯 개의 세계.",
+    sub: "리듬게임부터 사진 매거진, 동네 도움, 한일 번역 채팅까지.\n레이픽이 직접 기획하고 만들어 출시합니다.",
+    hint: "끌어서 돌려 보세요",
+    live: "출시",
+    coming: "출시 예정",
+  },
+  showcase: {
+    eyebrow: "Live now",
+    title: "지금 바로 내려받을 수 있는 앱",
+    more: "자세히 보기",
+    site: "공식 사이트",
+  },
+  upcoming: {
+    eyebrow: "Coming soon",
+    title: "곧 만나요",
+    sub: "출시를 앞두고 마지막 다듬기 중인 앱입니다.",
+    badge: "출시 예정",
+    site: "사이트 보기",
+  },
+  about: {
+    eyebrow: "About Raypick",
+    title1: "아이디어에서 출시까지,",
+    title2: "끝까지 직접 만듭니다.",
+    body: "레이픽은 모바일 앱을 만드는 회사입니다. 무엇을 만들지 정하는 일부터 디자인, 개발, 스토어 출시와 운영까지 한 팀이 직접 합니다.",
+    pillars: [
+      { k: "01", title: "기획부터 출시까지", body: "아이디어, 디자인, 개발, 스토어 출시와 운영까지 한 팀이 처음부터 끝까지 책임집니다." },
+      { k: "02", title: "세계를 향해", body: "BEATRAY는 7개 언어로 전 세계에 출시했고, 하루요는 한국과 일본을 잇는 앱으로 준비하고 있습니다." },
+      { k: "03", title: "사용자를 먼저", body: "Gallory는 계정·로그인 없이 모든 작업을 내 폰 안에서만 처리합니다. 쓰는 사람이 편하고 안심할 수 있는 앱을 만듭니다." },
+    ],
+  },
+  contact: {
+    eyebrow: "Contact",
+    title1: "함께",
+    title2: "만들어요.",
+    sub: "제휴, 협업, 투자, 그 밖의 문의는 메일로 보내 주세요.",
+    button: "메일 보내기",
+    copy: "주소 복사",
+    copied: "복사했어요",
+  },
+  footer: {
+    company: "주식회사 레이픽",
+    ceoLabel: "대표",
+    ceo: "신상권",
+    bizLabel: "사업자등록번호",
+    addressLabel: "주소",
+    address: "경상남도 창원시 진해구 연구단지1길 16, 207-2호",
+    emailLabel: "이메일",
+    rights: "© 2026 Raypick Inc. All rights reserved.",
+  },
+  store: { googlePlay: "Google Play", appStore: "App Store", on: "에서 받기" },
+  appPage: {
+    back: "모든 앱",
+    live: "출시",
+    coming: "출시 예정",
+    screenshots: "스크린샷",
+    download: "다운로드",
+    comingNote: "출시되면 이 페이지에서 바로 내려받을 수 있습니다.",
+    site: "공식 사이트",
+    others: "다른 앱",
+  },
+  fallback: "3D 화면을 불러오지 못해 그림으로 보여 드립니다.",
+};
+
+type Dict = typeof ko;
+
+const en: Dict = {
+  meta: {
+    title: "Raypick — Apps that light up everyday life",
+    description:
+      "Raypick plans, designs, builds and ships its own mobile apps. Meet BEATRAY, Gallory and Thisjom on Google Play and the App Store.",
+  },
+  nav: { apps: "Apps", company: "Company", contact: "Contact", menu: "Open menu", close: "Close menu", lang: "한국어" },
+  hero: {
+    eyebrow: "Raypick Inc. — App Studio",
+    line1: "Apps that light up",
+    line2: "everyday life.",
+    sub: "We plan, design, build and ship every app ourselves.\nFind Raypick apps on Google Play and the App Store today.",
+    ctaApps: "Explore apps",
+    ctaContact: "Work with us",
+    statLive: "Apps live",
+    statComing: "Coming soon",
+    statInhouseValue: "In-house",
+    statInhouse: "Plan · Design · Build",
+    scroll: "SCROLL",
+  },
+  orbit: {
+    eyebrow: "One studio · Five worlds",
+    title1: "One studio,",
+    title2: "five worlds.",
+    sub: "From a rhythm game and a photo magazine to neighborhood help and Korea–Japan translated chat —\nplanned, built and shipped by Raypick.",
+    hint: "Drag to explore",
+    live: "Live",
+    coming: "Coming soon",
+  },
+  showcase: {
+    eyebrow: "Live now",
+    title: "Apps you can download today",
+    more: "Learn more",
+    site: "Official site",
+  },
+  upcoming: {
+    eyebrow: "Coming soon",
+    title: "Almost here",
+    sub: "Apps getting their final polish before launch.",
+    badge: "Coming soon",
+    site: "Visit site",
+  },
+  about: {
+    eyebrow: "About Raypick",
+    title1: "From idea to launch,",
+    title2: "we build it all ourselves.",
+    body: "Raypick is a mobile app company. One team does it all — deciding what to build, design, development, store launch and running the app after.",
+    pillars: [
+      { k: "01", title: "Idea to launch", body: "Idea, design, development, store launch and operations — one team owns every step." },
+      { k: "02", title: "Built for the world", body: "BEATRAY launched worldwide in 7 languages, and Haruyo is being built to connect Korea and Japan." },
+      { k: "03", title: "People first", body: "Gallory works with no account and no login — everything stays on your phone. We make apps people can use with ease and trust." },
+    ],
+  },
+  contact: {
+    eyebrow: "Contact",
+    title1: "Let's build",
+    title2: "together.",
+    sub: "For partnerships, collaboration, investment or anything else, send us an email.",
+    button: "Send email",
+    copy: "Copy address",
+    copied: "Copied",
+  },
+  footer: {
+    company: "Raypick Inc.",
+    ceoLabel: "CEO",
+    ceo: "Sangkwon Shin",
+    bizLabel: "Business Reg. No.",
+    addressLabel: "Address",
+    address: "207-2, 16 Yeongudanji 1-gil, Jinhae-gu, Changwon-si, Gyeongsangnam-do, Korea",
+    emailLabel: "Email",
+    rights: "© 2026 Raypick Inc. All rights reserved.",
+  },
+  store: { googlePlay: "Google Play", appStore: "App Store", on: "Get it on" },
+  appPage: {
+    back: "All apps",
+    live: "Live",
+    coming: "Coming soon",
+    screenshots: "Screenshots",
+    download: "Download",
+    comingNote: "Once it launches, you can download it right here.",
+    site: "Official site",
+    others: "More apps",
+  },
+  fallback: "Showing images because 3D could not load.",
+};
+
+export const translations: Record<Language, Dict> = { ko, en };
+export type Translation = Dict;

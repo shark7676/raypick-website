@@ -1,64 +1,52 @@
 import type { Metadata, Viewport } from "next";
-import { Syne } from "next/font/google";
+import { Michroma } from "next/font/google";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { LanguageProvider } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./globals.css";
 
-const syne = Syne({
-  variable: "--font-syne",
+const michroma = Michroma({
+  variable: "--font-michroma",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: "400",
   display: "swap",
 });
+
+const { meta } = translations.ko;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.raypick.co.kr"),
   title: {
-    default: "Raypick — App & Media",
+    default: meta.title,
     template: "%s | Raypick",
   },
-  description:
-    "Raypick는 독창적인 앱 개발과 자체 미디어 제작을 결합하는 크리에이티브 그룹입니다. 다광, pixory, 다보자 등 혁신적인 앱과 오리지널 영상 콘텐츠를 만듭니다.",
-  keywords: [
-    "Raypick",
-    "레이픽",
-    "앱 개발",
-    "유튜브 제작",
-    "영상 제작",
-    "다광",
-    "pixory",
-    "다보자",
-  ],
+  description: meta.description,
+  keywords: ["Raypick", "레이픽", "앱 개발", "BEATRAY", "Gallory", "이것좀", "PARRYTHM", "하루요"],
   openGraph: {
-    title: "Raypick — App & Media",
-    description:
-      "독창적인 앱 개발과 자체 미디어 제작을 결합하는 크리에이티브 그룹, Raypick.",
+    title: meta.title,
+    description: meta.description,
     url: "https://www.raypick.co.kr",
     siteName: "Raypick",
     locale: "ko_KR",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
-  colorScheme: "dark",
+  themeColor: "#03050b",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={syne.variable}>
-      <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
-      </head>
+    <html lang="ko" className={michroma.variable}>
       <body>
         <LanguageProvider>
           <Navbar />
           {children}
+          <Footer />
         </LanguageProvider>
       </body>
     </html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="340 292 355 297">
+  <defs>
+    <linearGradient id="tri" x1="350" y1="540" x2="520" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2557c9"/><stop offset=".55" stop-color="#3a7cf0"/><stop offset="1" stop-color="#8cc6ff"/>
+    </linearGradient>
+    <linearGradient id="facet" x1="360" y1="540" x2="510" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d2566"/><stop offset="1" stop-color="#1d4aa8"/>
+    </linearGradient>
+    <clipPath id="tc"><path d="M377.3 344.0 L507.2 421.9 A12 12 0 0 1 507.7 442.2 L374.9 530.7 A16 16 0 0 1 350.0 517.4 L350.0 359.4 A18 18 0 0 1 377.3 344.0 Z"/></clipPath>
+  </defs>
+  <path d="M377 302 L590 302 C640 302 678 348 678 395 C678 458 624 480 590 495 L683 578 L577 578 L485 494 L590 440 C607 430 616 416 616 399 C616 374 600 357 574 357 L465 357 Z" fill="#EEF3FB"/>
+  <path d="M377.3 344.0 L507.2 421.9 A12 12 0 0 1 507.7 442.2 L374.9 530.7 A16 16 0 0 1 350.0 517.4 L350.0 359.4 A18 18 0 0 1 377.3 344.0 Z" fill="url(#tri)"/>
+  <path d="M523.5 431.7 L350.0 547.3 L350.0 487.3 L502.2 432.7 Z" fill="url(#facet)" clip-path="url(#tc)"/>
+</svg>

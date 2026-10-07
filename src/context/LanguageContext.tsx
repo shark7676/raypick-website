@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useSyncExternalStore, ReactNode } from 'react';
 import { translations, Language } from '../data/translations';
 
 interface LanguageContextType {
@@ -11,8 +11,40 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// The visitor's choice is remembered in localStorage (memory only if storage is blocked).
+let chosen: Language | null = null;
+const listeners = new Set<() => void>();
+
+function subscribe(onChange: () => void) {
+    listeners.add(onChange);
+    window.addEventListener('storage', onChange);
+    return () => {
+        listeners.delete(onChange);
+        window.removeEventListener('storage', onChange);
+    };
+}
+
+function getSnapshot(): Language {
+    if (chosen) return chosen;
+    try {
+        return localStorage.getItem('lang') === 'en' ? 'en' : 'ko';
+    } catch {
+        return 'ko';
+    }
+}
+
+const getServerSnapshot = (): Language => 'ko';
+
+function setLanguage(lang: Language) {
+    chosen = lang;
+    try {
+        localStorage.setItem('lang', lang);
+    } catch {}
+    listeners.forEach((fn) => fn());
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguage] = useState<Language>('ko');
+    const language = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
     useEffect(() => {
         document.documentElement.lang = language;

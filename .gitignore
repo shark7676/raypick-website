@@ -45,3 +45,8 @@ next-env.d.ts
 
 # claude code local
 .claude
+
+# design drafts & source materials (kept locally, not deployed)
+/public/drafts/
+/_assets/
+/로고.png
