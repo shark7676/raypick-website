@@ -56,7 +56,7 @@ npm run lint     # 린트
 ```
 
 ### 배포 (프로덕션)
-배포 후 https://www.raypick.co.kr 확인.
+`main`에 push하면 Vercel이 자동으로 배포합니다. 배포 후 https://www.raypick.co.kr 확인.
 
 ---
 
