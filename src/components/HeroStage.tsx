@@ -28,7 +28,7 @@ export default function HeroStage() {
   const labels = useRef<HTMLDivElement>(null);
   const aRef = useRef<HTMLDivElement>(null);
   const bRef = useRef<HTMLDivElement>(null);
-  const flashRef = useRef<HTMLDivElement>(null);
+  const dawnRef = useRef<HTMLDivElement>(null);
   const scene = useRef<HeroScene | null>(null);
   const [sceneReady, setSceneReady] = useState(false);
   const [noGL, setNoGL] = useState(false);
@@ -75,11 +75,8 @@ export default function HeroStage() {
         bRef.current.style.transform = `translateY(${((1 - smooth(0.46, 0.6, p)) * 40).toFixed(1)}px)`;
         bRef.current.style.visibility = b < 0.01 ? 'hidden' : 'visible';
       }
-      if (flashRef.current) {
-        // a disc of light grows out of the logo until it fills the screen
-        flashRef.current.style.opacity = String(smooth(0.84, 0.9, p));
-        flashRef.current.style.setProperty('--f', smooth(0.84, 0.99, p).toFixed(4));
-      }
+      // dawn rises over the last part of the scroll and meets the apps section below
+      dawnRef.current?.style.setProperty('--d', smooth(0.84, 1, p).toFixed(4));
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -195,7 +192,7 @@ export default function HeroStage() {
           {!noGL && <p className={styles.hint}>{t.orbit.hint}</p>}
         </div>
 
-        <div ref={flashRef} className={styles.flash} aria-hidden="true" />
+        <div ref={dawnRef} className={styles.dawn} aria-hidden="true" />
       </div>
     </section>
   );

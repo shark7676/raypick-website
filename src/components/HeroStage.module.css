@@ -1,6 +1,6 @@
 .stage {
   position: relative;
-  height: 340vh;
+  height: 320vh;
   background: var(--night);
 }
 
@@ -371,26 +371,32 @@
   box-shadow: 0 10px 30px -10px rgba(58, 124, 240, 0.6);
 }
 
-/* light switching on — blends into the apps section below */
-.flash {
-  --f: 0;
+/* dawn: light rises from below (blue -> soft day) and hands over to the apps section */
+.dawn {
+  --d: 0;
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 130%;
   z-index: 4;
   pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(
-    circle at 50% 38%,
-    #ffffff 0%,
-    var(--day) calc(var(--f) * 90%),
-    rgba(200, 222, 255, 0.6) calc(var(--f) * 100% + 12%),
-    rgba(58, 124, 240, 0) calc(var(--f) * 130% + 38%)
+  background: linear-gradient(
+    to top,
+    var(--day) 0%,
+    var(--day) 7%,
+    #d6e1f3 20%,
+    rgba(150, 182, 238, 0.72) 38%,
+    rgba(58, 110, 232, 0.3) 62%,
+    rgba(42, 95, 230, 0) 100%
   );
+  transform: translateY(calc((1 - var(--d)) * 100%));
+  will-change: transform;
 }
 
 @media (max-width: 760px) {
   .stage {
-    height: 300vh;
+    height: 285vh;
   }
 
   .fallback {

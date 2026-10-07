@@ -13,7 +13,7 @@
 
 ## 화면 구조
 - 첫 화면 + 앱 궤도: `src/components/HeroStage.tsx` (3D: `src/lib/three/heroScene.ts`, 로고 도형 `logoPaths.ts`)
-  - 스크롤하면 3D 로고가 가운데로 오고 앱 5개가 궤도로 나옴 → 끝에서 빛이 퍼지며 밝은 화면으로 전환
+  - 스크롤하면 3D 로고가 가운데로 오고 앱 5개가 궤도로 나옴 → 끝에서 아래부터 파란 새벽빛이 차오르며 밝은 화면으로 전환
 - 출시 앱 소개: `src/components/AppShowcase.tsx` (3D 휴대폰: `src/lib/three/phoneScene.ts`)
 - 출시 예정 / 회사 소개 / 문의 / 바닥글: `Upcoming.tsx`, `About.tsx`, `Contact.tsx`, `Footer.tsx`
 - 앱별 페이지: `src/app/apps/[slug]/page.tsx` + `src/components/AppDetail.tsx`
@@ -32,6 +32,7 @@
 - `next` 16.2.7 → 16.4.0 (심각 등급 보안 경고 해결)
 - 이전 디자인 파일(CodeHero, MatrixRain, 옛 이미지 등) 삭제
 - 배포 후 다듬기: 로고 누르면 맨 위로 이동, 세로 태블릿 첫 화면 배치, 실제 사이트 모바일 첫 화면 2.6~2.8초 확인
+- 궤도 → 앱 소개 전환: 흰 섬광을 없애고 새벽빛 전환으로, 첫 앱이 제목 바로 아래 나오게, 3D 휴대폰을 미리 준비
 
 ## 2026-06-08 — (이전 디자인) 다크+골드 리뉴얼, 매트릭스 히어로
 - AI 코드 에디터 + 녹색 매트릭스 코드 배경 히어로, 앱 3종(다광/pixory/다보자) 데모. 2026-10-08 리뉴얼로 대체됨

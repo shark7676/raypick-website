@@ -10,7 +10,7 @@ Next.js 16.4 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretend
 ## 주요 결정
 - 목적 = 회사 신뢰도. 앱 회사로만 (미디어 소개 제외).
 - 앱: 출시 BEATRAY · Gallory · 이것좀 / 출시 예정 PARRYTHM · 하루요. 정보는 `src/data/apps.ts` 한 곳.
-- 메인 = 3D 로고(A) → 스크롤하면 앱 궤도(B) → 빛이 퍼지며 밝은 화면 + 3D 휴대폰(C) → 출시 예정 → 회사 → 문의. 앱별 페이지 `/apps/[slug]`.
+- 메인 = 3D 로고(A) → 스크롤하면 앱 궤도(B) → 새벽빛이 차오르며 밝은 화면 + 3D 휴대폰(C) → 출시 예정 → 회사 → 문의. 앱별 페이지 `/apps/[slug]`.
 - 한국어 + 영어 (`src/data/translations.ts`). 문의는 admin@raypick.co.kr 메일 버튼.
 
 ## 코드 지도
@@ -32,3 +32,4 @@ Next.js 16.4 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretend
 - [ ] 하루요 진짜 앱 아이콘 나오면 `public/apps/haruyo/icon.webp` 교체 (2026-10-08 확인: rehi 저장소 아이콘은 아직 Flutter 기본 아이콘 → 임시 파스텔 아이콘 유지)
 - [x] 배포 후 실제 사이트 속도 확인
 - 2026-10-08 추가: 로고(위·아래) 누르면 맨 위로 이동, 세로 태블릿에서 첫 화면 글자 배치 수정
+- 2026-10-08 추가: 궤도 → 앱 소개 사이 흰 섬광 제거(대표 지적: 흰 화면이 길고 거슬림) → 아래에서 파란 새벽빛이 차오르는 전환, 빈 구간 절반 이하로, 3D 휴대폰 미리 준비

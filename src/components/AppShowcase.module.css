@@ -8,7 +8,7 @@
   position: relative;
   background: var(--day);
   color: var(--day-ink);
-  padding-top: clamp(80px, 14vh, 160px);
+  padding-top: clamp(40px, 7vh, 80px);
   transition: --tint 0.9s ease;
 }
 
@@ -18,7 +18,6 @@
   pointer-events: none;
   background:
     radial-gradient(42% 40% at 74% 50%, color-mix(in srgb, var(--tint) 26%, transparent), transparent 72%),
-    radial-gradient(60% 50% at 10% 0%, #ffffff, transparent 70%),
     linear-gradient(180deg, var(--day), #e7ecf5);
 }
 
@@ -130,6 +129,15 @@
 
 .panel.current {
   opacity: 1;
+}
+
+/* the first app starts right under the section title (no empty gap after the dawn) */
+@media (min-width: 901px) {
+  .panel:first-child {
+    align-items: flex-start;
+    min-height: 88vh;
+    padding-top: 9vh;
+  }
 }
 
 .card {

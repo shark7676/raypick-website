@@ -22,26 +22,39 @@ export default function AppShowcase() {
   useEffect(() => {
     let disposed = false;
     let loading = false;
-    const io = new IntersectionObserver(
+    let visible = false;
+    // build the phones well before the section arrives (while the orbit is on screen) ...
+    const prepare = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting && !scene.current && !loading) {
-          loading = true;
-          import('../lib/three/phoneScene')
-            .then(({ PhoneScene }) => {
-              if (disposed || !canvas.current) return;
-              scene.current = new PhoneScene(canvas.current, liveApps.map((a) => ({ screens: a.screens, frame: a.frame })));
-              scene.current.setActive(activeRef.current); // the visitor may already be past the first app
-            })
-            .catch(() => setNoGL(true));
-        }
-        scene.current?.setRunning(e.isIntersecting);
+        if (!e.isIntersecting || scene.current || loading) return;
+        loading = true;
+        import('../lib/three/phoneScene')
+          .then(({ PhoneScene }) => {
+            if (disposed || !canvas.current) return;
+            scene.current = new PhoneScene(canvas.current, liveApps.map((a) => ({ screens: a.screens, frame: a.frame })));
+            scene.current.setActive(activeRef.current); // the visitor may already be past the first app
+            scene.current.setRunning(visible);
+          })
+          .catch(() => setNoGL(true));
       },
-      { rootMargin: '300px 0px' },
+      { rootMargin: '1800px 0px' },
     );
-    if (section.current) io.observe(section.current);
+    // ... but only draw them while they can be seen
+    const show = new IntersectionObserver(
+      ([e]) => {
+        visible = e.isIntersecting;
+        scene.current?.setRunning(visible);
+      },
+      { rootMargin: '200px 0px' },
+    );
+    if (section.current) {
+      prepare.observe(section.current);
+      show.observe(section.current);
+    }
     return () => {
       disposed = true;
-      io.disconnect();
+      prepare.disconnect();
+      show.disconnect();
       scene.current?.dispose();
       scene.current = null;
     };
