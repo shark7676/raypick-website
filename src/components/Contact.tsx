@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { company } from '../data/translations';
 import { useLanguage } from '../context/LanguageContext';
+import Phrases from './Phrases';
 import Reveal from './Reveal';
 import styles from './Sections.module.css';
 
@@ -31,7 +32,9 @@ export default function Contact() {
         <h2 id="contact-title" className={styles.contactTitle}>
           {t.contact.title1} <em>{t.contact.title2}</em>
         </h2>
-        <p className={styles.contactSub}>{t.contact.sub}</p>
+        <p className={styles.contactSub}>
+          <Phrases text={t.contact.sub} />
+        </p>
         <a className={styles.mail} href={`mailto:${company.email}`}>
           {company.email}
         </a>

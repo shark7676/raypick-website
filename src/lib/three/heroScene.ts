@@ -30,6 +30,8 @@ interface Tile {
   group: THREE.Group;
   mesh: THREE.Mesh;
   glow: THREE.Mesh;
+  frameMat: THREE.MeshBasicMaterial;
+  sheenMat: THREE.ShaderMaterial;
   label: HTMLDivElement;
   hover: number;
 }
@@ -47,7 +49,6 @@ const easeOutBack = (t: number) => {
 };
 
 const LOGO_SCALE = 0.0128;
-const TILT = 0.26;
 
 function radialTexture(stops: [number, string][]) {
   const c = document.createElement("canvas");
@@ -62,6 +63,23 @@ function radialTexture(stops: [number, string][]) {
   return t;
 }
 
+/** flat rounded rectangle with 0..1 UVs */
+function roundedPlane(w: number, h: number, r: number) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y);
+  s.lineTo(x + w - r, y);
+  s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r);
+  s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h);
+  s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r);
+  s.quadraticCurveTo(x, y, x + r, y);
+  const g = new THREE.ShapeGeometry(s, 16), p = g.attributes.position, uv = g.attributes.uv;
+  for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / w + 0.5, p.getY(i) / h + 0.5);
+  return g;
+}
+
 const additive = (map: THREE.Texture, opacity = 1) =>
   new THREE.MeshBasicMaterial({ map, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity });
 
@@ -71,6 +89,8 @@ const shapesFrom = (d: string) =>
 export class HeroScene {
   private renderer: THREE.WebGLRenderer;
   private scene = new THREE.Scene();
+  /** tiles in front of the logo are drawn here, after the glow, so they stay sharp */
+  private front = new THREE.Scene();
   private camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
   private composer: EffectComposer;
   private bloom: UnrealBloomPass;
@@ -91,7 +111,7 @@ export class HeroScene {
   private reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   private small = false;
   private layoutA = { pos: new THREE.Vector3(), scale: 1 };
-  private layoutB = { centerY: 1.1, scale: 0.66, radius: 4.7, camZ: 17, lookOff: 1.25, tile: 1 };
+  private layoutB = { centerY: 1.1, scale: 0.66, radius: 4.7, camZ: 17, lookOff: 1.25, tile: 1, tilt: 0.26, base: 0.82, gain: 0.28 };
 
   private target = 0;
   private progress = 0;
@@ -217,7 +237,7 @@ export class HeroScene {
     this.scene.add(new THREE.Points(pGeo, this.particlesMat));
 
     // ---- orbit: a ring of fine light dots with three comet streaks flowing the way the apps turn
-    this.ringGroup.rotation.x = Math.PI / 2 + TILT;
+    this.ringGroup.rotation.x = Math.PI / 2 + this.layoutB.tilt;
     this.scene.add(this.ringGroup);
     const M = window.innerWidth < 760 ? 420 : 760;
     const ang = new Float32Array(M);
@@ -261,17 +281,36 @@ export class HeroScene {
     // ---- app tiles
     const loader = new THREE.TextureLoader();
     const tileGeo = new RoundedBoxGeometry(1.3, 1.3, 0.24, 5, 0.26);
+    const frameGeo = roundedPlane(1.44, 1.44, 0.33);
+    const faceGeo = roundedPlane(1.3, 1.3, 0.26);
+    const maxAniso = this.renderer.capabilities.getMaxAnisotropy();
     apps.forEach((app, i) => {
       const side = new THREE.MeshPhysicalMaterial({ color: new THREE.Color(app.color).multiplyScalar(0.4), metalness: 0.6, roughness: 0.3, clearcoat: 0.8, envMapIntensity: 0.5 });
-      const front = new THREE.MeshPhysicalMaterial({ color: "#ffffff", roughness: 0.5, clearcoat: 0.35, clearcoatRoughness: 0.2, envMapIntensity: 0.15 });
+      // the icon is self-lit so it keeps its true colors at any angle (no washed-out highlights)
+      const face = new THREE.MeshPhysicalMaterial({ color: "#000000", emissive: "#ffffff", emissiveIntensity: 0, roughness: 0.35, clearcoat: 0.45, clearcoatRoughness: 0.12, envMapIntensity: 0.2 });
       loader.load(app.icon, (t) => {
         t.colorSpace = THREE.SRGBColorSpace;
-        t.anisotropy = 8;
-        front.map = t;
-        front.needsUpdate = true;
+        t.anisotropy = maxAniso;
+        face.emissiveMap = t;
+        face.emissiveIntensity = 1.12;
+        face.needsUpdate = true;
       });
-      const mesh = new THREE.Mesh(tileGeo, [side, side, side, side, front, side]);
+      const mesh = new THREE.Mesh(tileGeo, [side, side, side, side, face, side]);
       mesh.userData.i = i;
+      // neon edge in the app's color, shown when the tile comes to the front
+      const frameMat = new THREE.MeshBasicMaterial({ color: app.color, transparent: true, opacity: 0, depthWrite: false });
+      const frame = new THREE.Mesh(frameGeo, frameMat);
+      frame.position.z = -0.135;
+      // a streak of light gliding across the glass face
+      const sheenMat = new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+        uniforms: { uPos: { value: -1 }, uA: { value: 0 } },
+        vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }",
+        fragmentShader: "varying vec2 vUv; uniform float uPos; uniform float uA; void main(){ float d = vUv.x*0.8 + vUv.y*0.6; float b = smoothstep(0.09, 0.0, abs(d - uPos)) + 0.35*smoothstep(0.22, 0.0, abs(d - uPos - 0.12)); gl_FragColor = vec4(vec3(b*uA), 1.0); }",
+      });
+      const sheen = new THREE.Mesh(faceGeo, sheenMat);
+      sheen.position.z = 0.126;
+      mesh.add(frame, sheen);
       const glow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), additive(radialTexture([[0, app.color], [0.35, app.color + "55"], [1, app.color + "00"]]), 0));
       glow.scale.setScalar(2.6);
       const group = new THREE.Group();
@@ -281,9 +320,10 @@ export class HeroScene {
       const label = document.createElement("div");
       label.className = "orbit-label";
       label.dataset.soon = String(app.soon);
+      label.style.setProperty("--c", app.color);
       label.innerHTML = "<b></b><span></span>";
       this.labelsEl.appendChild(label);
-      this.tiles.push({ app, group, mesh, glow, label, hover: 0 });
+      this.tiles.push({ app, group, mesh, glow, frameMat, sheenMat, label, hover: 0 });
     });
 
     // ---- lights
@@ -294,12 +334,19 @@ export class HeroScene {
     const under = new THREE.DirectionalLight("#1a3cff", 0.5);
     under.position.set(0, -6, 3);
     this.scene.add(key, rim, under);
+    this.front.environment = this.scene.environment;
+    this.front.environmentIntensity = this.scene.environmentIntensity;
+    this.front.add(key.clone(), rim.clone());
 
     // ---- post
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
     this.bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.75, 0.6, 0.66);
     this.composer.addPass(this.bloom);
+    const frontPass = new RenderPass(this.front, this.camera);
+    frontPass.clear = false; // keep the glowing scene underneath
+    frontPass.clearDepth = true; // front tiles are drawn on top
+    this.composer.addPass(frontPass);
     this.composer.addPass(new OutputPass());
 
     this.resize();
@@ -349,7 +396,7 @@ export class HeroScene {
     window.removeEventListener("pointerup", this.onUp);
     this.canvas.removeEventListener("pointerdown", this.onDown);
     this.tiles.forEach((t) => t.label.remove());
-    this.scene.traverse((o) => {
+    [this.scene, this.front].forEach((sc) => sc.traverse((o) => {
       const m = o as THREE.Mesh;
       if (m.geometry) m.geometry.dispose();
       const mats = Array.isArray(m.material) ? m.material : m.material ? [m.material] : [];
@@ -358,7 +405,7 @@ export class HeroScene {
         if (map) map.dispose();
         mat.dispose();
       });
-    });
+    }));
     this.composer.dispose();
     this.renderer.dispose();
   }
@@ -380,12 +427,16 @@ export class HeroScene {
       this.layoutA.pos.set(Math.min(4.2, 2.5 * aspect - 0.35), 0.2, 0);
       this.layoutA.scale = 1;
     } else {
-      this.layoutA.pos.set(-0.1, 2.1, 0);
-      this.layoutA.scale = 0.42;
+      // portrait: a big logo in the upper half, text below
+      this.layoutA.pos.set(0, 1.85, 0);
+      this.layoutA.scale = this.small ? 0.54 : 0.5;
     }
+    // phones: bigger tiles on a steeper orbit so front and back don't pile up
     this.layoutB = this.small
-      ? { centerY: 1.6, scale: 0.42, radius: 2.25, camZ: 21, lookOff: 2.4, tile: 0.66 }
-      : { centerY: 1.1, scale: 0.66 * Math.min(1, aspect), radius: Math.min(4.7, 2.9 * aspect), camZ: 17, lookOff: 1.25, tile: Math.min(1, (2.9 * aspect) / 4.3) };
+      ? { centerY: 1.7, scale: 0.5, radius: 1.75, camZ: 17.5, lookOff: 2.3, tile: 0.55, tilt: 0.45, base: 0.72, gain: 0.5 }
+      : { centerY: 1.1, scale: 0.66 * Math.min(1, aspect), radius: Math.min(4.7, 2.9 * aspect), camZ: 17, lookOff: 1.25, tile: Math.min(1, (2.9 * aspect) / 4.3), tilt: 0.26, base: 0.82, gain: 0.28 };
+    this.ringGroup.rotation.x = Math.PI / 2 + this.layoutB.tilt;
+    this.bloom.strength = this.small ? 0.5 : 0.75;
     this.orbit.scale.setScalar(this.layoutB.radius);
     this.orbitMat.uniforms.uPR.value = pr;
     this.ringGroup.position.y = this.layoutB.centerY;
@@ -453,8 +504,8 @@ export class HeroScene {
 
     this.triMat.emissiveIntensity = ign * 0.55 + flash * 0.9 + Math.sin(t * 1.7) * 0.05 * idle;
     this.triLight.intensity = ign * 12 + flash * 14;
-    (this.halo.material as THREE.MeshBasicMaterial).opacity = ign * 0.32 + flash * 0.3;
-    this.raysMat.uniforms.uIntensity.value = (ign * 0.42 + flash * 0.5) * lerp(1, 0.4, morph) * (this.small ? 0.6 : 1);
+    (this.halo.material as THREE.MeshBasicMaterial).opacity = (ign * 0.32 + flash * 0.3) * (this.small ? 0.6 : 1);
+    this.raysMat.uniforms.uIntensity.value = (ign * 0.42 + flash * 0.5) * lerp(1, 0.4, morph) * (this.small ? 0.35 : 1);
     this.raysMat.uniforms.uTime.value = t;
     this.particlesMat.uniforms.uTime.value = t;
     this.particlesMat.uniforms.uAlpha.value = intro;
@@ -498,21 +549,30 @@ export class HeroScene {
       if (!o.group.visible) return;
       const th = this.angle + p * 1.2 + (i * Math.PI * 2) / n;
       const ox = R * Math.cos(th);
-      const oy = B.centerY - R * Math.sin(th) * Math.sin(TILT) + Math.sin(t * 1.1 + i * 1.7) * 0.08 * idle;
-      const oz = R * Math.sin(th) * Math.cos(TILT);
+      const oy = B.centerY - R * Math.sin(th) * Math.sin(B.tilt) + Math.sin(t * 1.1 + i * 1.7) * 0.08 * idle;
+      const oz = R * Math.sin(th) * Math.cos(B.tilt);
       const f = Math.min(k, 1);
       o.group.position.set(lerp(triWorld.x, ox, f), lerp(triWorld.y, oy, f), lerp(triWorld.z, oz, f));
       o.hover += ((this.hovered === i ? 1 : 0) - o.hover) * 0.12;
       const depth = (Math.sin(th) + 1) / 2;
-      const s = (0.82 + depth * 0.28 + o.hover * 0.22) * k * B.tile;
+      const focus = smooth(0.74, 1, depth); // 1 = right at the front center
+      const s = (B.base + depth * B.gain + o.hover * 0.22 + focus * 0.08) * k * B.tile;
       o.group.scale.setScalar(Math.max(s, 0.001));
       o.group.lookAt(this.camera.position);
+      // in front of the logo: draw after the glow so the icon stays crisp
+      const layer = o.group.position.z > 0.3 ? this.front : this.scene;
+      if (o.group.parent !== layer) layer.add(o.group);
+      // settle square to the camera as it reaches the front
+      const calm = 1 - 0.85 * focus;
       o.mesh.rotation.set(
-        Math.sin(t * 0.8 + i) * 0.12 * idle - this.sm.y * 0.2,
-        Math.cos(t * 0.7 + i) * 0.15 * idle + this.sm.x * 0.3,
+        (Math.sin(t * 0.8 + i) * 0.12 * idle - this.sm.y * 0.2) * calm,
+        (Math.cos(t * 0.7 + i) * 0.15 * idle + this.sm.x * 0.3) * calm,
         0,
       );
-      (o.glow.material as THREE.MeshBasicMaterial).opacity = (0.1 + depth * 0.16 + o.hover * 0.3) * (o.app.soon ? 0.7 : 1) * f;
+      (o.glow.material as THREE.MeshBasicMaterial).opacity = (0.1 + depth * 0.16 + o.hover * 0.3) * (o.app.soon ? 0.7 : 1) * f * (1 - 0.65 * focus);
+      o.frameMat.opacity = Math.min(1, focus * 0.9 + o.hover * 0.6) * f;
+      o.sheenMat.uniforms.uA.value = 0.3 * Math.max(focus, o.hover) * f;
+      o.sheenMat.uniforms.uPos.value = ((t * 0.45 + i * 0.37) % 1.6) * 1.25 - 0.25;
 
       if (labelsOn > 0.01) {
         this.tmp.copy(o.group.position);
@@ -520,8 +580,9 @@ export class HeroScene {
         this.tmp.project(this.camera);
         const x = Math.min(Math.max((this.tmp.x * 0.5 + 0.5) * w, 70), w - 70); // keep labels on screen
         const y = (-this.tmp.y * 0.5 + 0.5) * h;
-        o.label.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,0) scale(${(0.86 + depth * 0.14 + o.hover * 0.1).toFixed(3)})`;
-        o.label.style.opacity = (((0.25 + depth * 0.75) + o.hover * 0.4) * labelsOn).toFixed(3);
+        o.label.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,0) scale(${(0.86 + depth * 0.14 + focus * 0.08 + o.hover * 0.1).toFixed(3)})`;
+        o.label.style.opacity = ((smooth(0.3, 0.8, depth) + o.hover * 0.4) * labelsOn).toFixed(3);
+        o.label.style.setProperty("--f", focus.toFixed(3));
         o.label.style.zIndex = String(Math.round(depth * 100));
       }
     });

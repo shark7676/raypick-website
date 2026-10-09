@@ -7,6 +7,7 @@ import { company } from '../data/translations';
 import { useLanguage } from '../context/LanguageContext';
 import type { HeroScene } from '../lib/three/heroScene';
 import { AppleIcon, GooglePlayIcon } from './icons';
+import Phrases from './Phrases';
 import styles from './HeroStage.module.css';
 
 const clamp01 = (x: number) => Math.min(Math.max(x, 0), 1);
@@ -131,7 +132,9 @@ export default function HeroStage() {
               <span className={styles.glow}>{t.hero.line2}</span>
             </span>
           </h1>
-          <p className={`${styles.sub} ${styles.fade} ${styles.d1}`}>{t.hero.sub}</p>
+          <p className={`${styles.sub} ${styles.fade} ${styles.d1}`}>
+            <Phrases text={t.hero.sub} />
+          </p>
           <div className={`${styles.cta} ${styles.fade} ${styles.d2}`}>
             <a className="btn btn-light" href="#apps">
               {t.hero.ctaApps} <span className="arr">→</span>
@@ -186,9 +189,11 @@ export default function HeroStage() {
           )}
           <p className="eyebrow">{t.orbit.eyebrow}</p>
           <h2 className={styles.h2}>
-            {t.orbit.title1} <em>{t.orbit.title2}</em>
+            <span className="phrase">{t.orbit.title1}</span> <em className="phrase">{t.orbit.title2}</em>
           </h2>
-          <p className={styles.subB}>{t.orbit.sub}</p>
+          <p className={styles.subB}>
+            <Phrases text={t.orbit.sub} />
+          </p>
           {!noGL && <p className={styles.hint}>{t.orbit.hint}</p>}
         </div>
 

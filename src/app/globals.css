@@ -60,6 +60,23 @@ img {
   max-width: 100%;
 }
 
+/* line breaks: balanced headings, no single word left alone on the last line */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+dd {
+  text-wrap: pretty;
+}
+
+/* a phrase that stays on one line (see <Phrases>) */
+.phrase {
+  display: inline-block;
+}
+
 button {
   font: inherit;
   color: inherit;

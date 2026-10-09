@@ -197,7 +197,6 @@
   font-size: clamp(16px, 1.35vw, 19px);
   line-height: 1.75;
   color: var(--night-mute);
-  white-space: pre-line;
 }
 
 .cta {
@@ -333,7 +332,6 @@
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.7;
   color: var(--night-mute);
-  white-space: pre-line;
 }
 
 .hint {

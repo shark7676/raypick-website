@@ -6,6 +6,7 @@ import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { liveApps } from '../data/apps';
 import { useLanguage } from '../context/LanguageContext';
 import type { PhoneScene } from '../lib/three/phoneScene';
+import Phrases from './Phrases';
 import StoreButtons from './StoreButtons';
 import styles from './AppShowcase.module.css';
 
@@ -90,7 +91,9 @@ export default function AppShowcase() {
           <i className={styles.live} />
           {t.showcase.eyebrow}
         </p>
-        <h2 className={styles.title}>{t.showcase.title}</h2>
+        <h2 className={styles.title}>
+          <Phrases text={t.showcase.title} />
+        </h2>
       </header>
 
       <div className={styles.body}>
