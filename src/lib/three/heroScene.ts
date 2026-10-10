@@ -159,7 +159,7 @@ export class HeroScene {
     this.logo.scale.setScalar(LOGO_SCALE);
     const rGeo = new THREE.ExtrudeGeometry(shapesFrom(LOGO_R), { depth: 44, bevelEnabled: true, bevelThickness: 10, bevelSize: 6.5, bevelSegments: 10, curveSegments: 72 });
     rGeo.translate(0, 0, -22);
-    this.logo.add(new THREE.Mesh(rGeo, new THREE.MeshPhysicalMaterial({ color: "#1a2b52", metalness: 0.92, roughness: 0.36, clearcoat: 0.7, clearcoatRoughness: 0.2 })));
+    this.logo.add(new THREE.Mesh(rGeo, new THREE.MeshPhysicalMaterial({ color: "#1a2b52", metalness: 0.92, roughness: 0.36, clearcoat: 0.7, clearcoatRoughness: 0.28 })));
     const tGeo = new THREE.ExtrudeGeometry(shapesFrom(LOGO_TRIANGLE), { depth: 34, bevelEnabled: true, bevelThickness: 16, bevelSize: 10, bevelSegments: 14, curveSegments: 48 });
     tGeo.translate(0, 0, -12);
     this.triMat = new THREE.MeshPhysicalMaterial({
@@ -327,7 +327,7 @@ export class HeroScene {
     });
 
     // ---- lights
-    const key = new THREE.DirectionalLight("#ffffff", 1.5);
+    const key = new THREE.DirectionalLight("#ffffff", 1.3);
     key.position.set(-4, 7, 9);
     const rim = new THREE.DirectionalLight("#4d8dff", 2.6);
     rim.position.set(6, 2, -6);
@@ -339,9 +339,12 @@ export class HeroScene {
     this.front.add(key.clone(), rim.clone());
 
     // ---- post
-    this.composer = new EffectComposer(this.renderer);
+    // multisampled target: without it the thin edge highlights alias into crawling dotted lines
+    const samples = Math.min(window.innerWidth < 760 ? 4 : 8, this.renderer.capabilities.maxSamples);
+    const target = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples });
+    this.composer = new EffectComposer(this.renderer, target);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
-    this.bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.75, 0.6, 0.66);
+    this.bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.75, 0.6, 0.72);
     this.composer.addPass(this.bloom);
     const frontPass = new RenderPass(this.front, this.camera);
     frontPass.clear = false; // keep the glowing scene underneath
