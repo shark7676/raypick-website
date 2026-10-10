@@ -194,7 +194,6 @@ export default function HeroStage() {
           <p className={styles.subB}>
             <Phrases text={t.orbit.sub} />
           </p>
-          {!noGL && <p className={styles.hint}>{t.orbit.hint}</p>}
         </div>
 
         <div ref={dawnRef} className={styles.dawn} aria-hidden="true" />

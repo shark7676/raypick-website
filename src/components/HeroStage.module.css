@@ -334,16 +334,6 @@
   color: var(--night-mute);
 }
 
-.hint {
-  margin-top: 18px;
-  font-family: var(--font-wide);
-  font-size: 9.5px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--sky);
-  opacity: 0.8;
-}
-
 .iconRow {
   display: flex;
   flex-wrap: wrap;
