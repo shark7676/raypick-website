@@ -437,6 +437,13 @@
     font-size: 12px;
   }
 
+  /* keep the small caps line on one line */
+  .b :global(.eyebrow) {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+
   .labels :global(.orbit-label span) {
     font-size: 10px;
   }

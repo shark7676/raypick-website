@@ -26,9 +26,9 @@ const ko = {
     scroll: "SCROLL",
   },
   orbit: {
-    eyebrow: "One studio · Five worlds",
+    eyebrow: "One studio · Growing worlds",
     title1: "하나의 스튜디오,",
-    title2: "다섯 개의 세계.",
+    title2: "계속 늘어나는 세계.",
     sub: "리듬게임부터 사진 매거진,|동네 도움, 한일 번역 채팅까지.\n레이픽이 직접 기획하고|만들어 출시합니다.",
     hint: "끌어서 돌려 보세요",
     live: "출시",
@@ -114,9 +114,9 @@ const en: Dict = {
     scroll: "SCROLL",
   },
   orbit: {
-    eyebrow: "One studio · Five worlds",
+    eyebrow: "One studio · Growing worlds",
     title1: "One studio,",
-    title2: "five worlds.",
+    title2: "ever-growing worlds.",
     sub: "From a rhythm game and a photo magazine|to neighborhood help and Korea–Japan translated chat —\nplanned, built and shipped by Raypick.",
     hint: "Drag to explore",
     live: "Live",

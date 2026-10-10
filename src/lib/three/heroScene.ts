@@ -10,7 +10,7 @@ import { LOGO_R, LOGO_TRIANGLE, LOGO_TRIANGLE_CENTER } from "./logoPaths";
 
 /**
  * Home hero: the 3D Raypick logo (scene A) that, as the visitor scrolls,
- * moves to the center and releases the five apps into an orbit (scene B).
+ * moves to the center and releases the apps into an orbit (scene B).
  * Scroll progress 0..1 comes from the page via setProgress().
  */
 
