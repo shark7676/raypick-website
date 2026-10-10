@@ -356,6 +356,7 @@ export class HeroScene {
     window.addEventListener("resize", this.resize);
     window.addEventListener("pointermove", this.onMove, { passive: true });
     window.addEventListener("pointerup", this.onUp);
+    window.addEventListener("pointercancel", this.onCancel);
     canvas.addEventListener("pointerdown", this.onDown);
     // compile shaders without freezing the page (parallel compile where the GPU supports it)
     this.renderer
@@ -397,6 +398,7 @@ export class HeroScene {
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("pointermove", this.onMove);
     window.removeEventListener("pointerup", this.onUp);
+    window.removeEventListener("pointercancel", this.onCancel);
     this.canvas.removeEventListener("pointerdown", this.onDown);
     this.tiles.forEach((t) => t.label.remove());
     [this.scene, this.front].forEach((sc) => sc.traverse((o) => {
@@ -476,6 +478,14 @@ export class HeroScene {
     if (moved < 6 && this.hovered >= 0) this.onTile(this.tiles[this.hovered].app.slug);
   };
 
+  // a finger that starts on the canvas but scrolls the page ends in "cancel", not "up":
+  // stop dragging so the orbit goes back to turning on its own
+  private onCancel = () => {
+    if (!this.dragging) return;
+    this.dragging = false;
+    this.canvas.classList.remove("dragging");
+  };
+
   private frame = (now: number) => {
     const t = (now - this.t0) / 1000;
     const dt = Math.min((now - this.last) / 1000, 0.05);
@@ -529,7 +539,7 @@ export class HeroScene {
     this.orbitMat.uniforms.uAngle.value = this.angle + p * 1.2;
     this.orbitMat.uniforms.uDir.value = this.spinDir;
     if (!this.dragging) {
-      const auto = this.reduce ? 0 : 0.11 * this.spinDir;
+      const auto = this.reduce ? 0 : (this.small ? 0.22 : 0.11) * this.spinDir; // the phone orbit is small, so it turns faster
       this.vel += (auto - this.vel) * Math.min(dt * 1.6, 1);
       this.angle += this.vel * dt;
     }
