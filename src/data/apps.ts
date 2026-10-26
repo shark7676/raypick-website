@@ -63,11 +63,11 @@ export const apps: AppItem[] = [
       ko: "갤러리에 잠든 사진으로 표지·속지·지도까지 나만의 매거진 한 권을 만드는 앱. 계정·로그인 없이, 모든 작업이 내 폰 안에서만 이뤄집니다.",
       en: "Make your own magazine — cover, pages, even maps — from the photos already on your phone. No account, no login: not a single photo leaves your phone.",
     },
-    color: "#F66652",
+    color: "#E7C677", // 1.2 금박색 (2026-10-26 새 디자인)
     icon: "/apps/gallory/icon.webp",
-    screens: img("gallory", ["screen1.webp", "screen2.webp", "screen3.webp"]),
+    screens: img("gallory", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
     shots: img("gallory", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
-    frame: "#e9d6c6",
+    frame: "#3A302A",
     stores: {
       android: "https://play.google.com/store/apps/details?id=com.gallory.app",
       ios: "https://apps.apple.com/app/id6813446942",
