@@ -1,6 +1,7 @@
 import { Language } from "./translations";
 
-export type AppStatus = "live" | "coming";
+/** live = on the stores · coming = not released yet · updating = released before, temporarily off the store */
+export type AppStatus = "live" | "coming" | "updating";
 type Text = Record<Language, string>;
 
 export interface AppItem {
@@ -31,6 +32,7 @@ const img = (slug: string, files: string[]) => files.map((f) => `/apps/${slug}/$
 /**
  * 앱을 추가·수정하려면 이 배열만 고치면 됩니다.
  * 이미지는 /public/apps/<slug>/ 에 넣습니다. 출시되면 status 를 "live" 로 바꾸고 stores 에 링크를 넣습니다.
+ * 스토어에서 잠시 내려가면 status 를 "updating" 으로 — 다운로드 버튼이 숨고 "업데이트 준비 중"으로 보입니다.
  */
 export const apps: AppItem[] = [
   {
@@ -74,7 +76,7 @@ export const apps: AppItem[] = [
   },
   {
     slug: "thisjom",
-    status: "live",
+    status: "updating", // 2026-10-26: Google Play 에서 내려가 있음(404) — 다시 올라오면 "live" 로
     name: { ko: "이것좀", en: "Thisjom" },
     genre: { ko: "동네 커뮤니티", en: "Local community" },
     tagline: { ko: "동네 도움 · 안 쓰는 물건 정리", en: "Neighborhood help & item giveaways" },
@@ -92,21 +94,24 @@ export const apps: AppItem[] = [
   },
   {
     slug: "parrythm",
-    status: "coming",
+    status: "live", // Google Play 2026-10-13 · App Store 2026-10-26
     name: { ko: "PARRYTHM", en: "PARRYTHM" },
     genre: { ko: "리듬 액션 게임", en: "Rhythm action game" },
-    tagline: { ko: "막고 때리는 리듬 액션 게임", en: "Parry the beat — rhythm action" },
+    tagline: { ko: "비트를 막아라! 리듬 액션 월드 투어", en: "Parry the Beat: Rhythm Tour" },
     description: {
-      ko: "박자에 맞춰 막고 때리는 리듬 액션 게임. 도시를 돌며 곡마다 스타 보스와 맞붙는 월드 투어를 준비 중입니다.",
-      en: "A rhythm action game where you parry and strike on the beat, touring city to city and facing a star boss in each song.",
+      ko: "노래에 맞춰 날아오는 스타 보스의 공격을 막고 되받아치는 리듬 액션 게임이에요. 서울에서 런던까지 밴드와 함께 월드 투어를 돌며, 60곡이 넘는 오리지널 곡을 뽑기 없이 실력으로 즐겨요.",
+      en: "A rhythm action game where you parry a star boss's attacks right on the beat. Tour the world from Seoul to London with your band across 60+ original songs, with no gacha.",
     },
-    color: "#EA28A6",
+    color: "#DA178D",
     icon: "/apps/parrythm/icon.webp",
-    screens: img("parrythm", ["art-stage.webp"]),
-    shots: [],
+    screens: img("parrythm", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
+    shots: img("parrythm", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
     art: img("parrythm", ["art-riff.webp", "art-queen.webp"]),
     frame: "#2a1830",
-    stores: {},
+    stores: {
+      android: "https://play.google.com/store/apps/details?id=com.raypick.parrythm",
+      ios: "https://apps.apple.com/app/id6821534869",
+    },
     site: "https://parrythm.com",
   },
   {
@@ -131,4 +136,6 @@ export const apps: AppItem[] = [
 
 export const liveApps = apps.filter((a) => a.status === "live");
 export const comingApps = apps.filter((a) => a.status === "coming");
+/** everything not downloadable right now — shown in the "coming soon" section */
+export const upcomingApps = apps.filter((a) => a.status !== "live");
 export const getApp = (slug: string) => apps.find((a) => a.slug === slug);

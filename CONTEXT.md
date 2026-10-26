@@ -9,7 +9,8 @@ Next.js 16.4 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretend
 
 ## 주요 결정
 - 목적 = 회사 신뢰도. 앱 회사로만 (미디어 소개 제외).
-- 앱: 출시 BEATRAY · Gallory · 이것좀 / 출시 예정 PARRYTHM · 하루요. 정보는 `src/data/apps.ts` 한 곳.
+- 앱(2026-10-26 기준): 출시 BEATRAY · Gallory · PARRYTHM / 업데이트 준비 중 이것좀(구글 플레이에서 내려가 있음) / 출시 예정 하루요. 정보는 `src/data/apps.ts` 한 곳 (상태: live · updating · coming).
+- 회사 영문 이름: **Raypick Co., Ltd.** (애플 판매자 이름·PARRYTHM 사이트와 통일, 2026-10-26 대표 결정)
 - 메인 = 3D 로고(A) → 스크롤하면 앱 궤도(B) → 새벽빛이 차오르며 밝은 화면 + 3D 휴대폰(C) → 출시 예정 → 회사 → 문의. 앱별 페이지 `/apps/[slug]`.
 - 한국어 + 영어 (`src/data/translations.ts`). 문의는 admin@raypick.co.kr 메일 버튼.
 
@@ -40,3 +41,5 @@ Next.js 16.4 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretend
 - 2026-10-10: 위 2026-10-10 변경 4건(커밋 130f380~78422be) 실제 사이트 배포 완료, raypick.co.kr에서 확인
 - 2026-10-10: 휴대폰에서 궤도가 멈추는 문제 수정 — 원인: 손가락이 3D 화면에서 스크롤로 바뀔 때 오는 "끌기 취소(pointercancel)" 신호를 처리하지 않아 계속 끄는 중으로 착각 → 처리 추가. 휴대폰 자동 회전 2배 빠르게(약 28초에 한 바퀴). 터치 흉내 크롬으로 수정 전 멈춤/수정 후 회전 확인
 - 2026-10-10: 궤도 멈춤 수정(커밋 3e8a7b7) 실제 사이트 배포 완료 — raypick.co.kr에서 손가락 스크롤 후에도 회전 확인
+- 2026-10-26: PARRYTHM 출시 반영(구글 10/13·애플 10/26, 스토어 링크 2개·실제 게임 화면·공식 아이콘·스토어 소개 문구). 이것좀은 구글 플레이 404 확인 → '업데이트 준비 중'으로 '곧 만나요' 칸에 표시(다운로드 버튼 없음, 대표 결정). 회사 영문 이름 Raypick Co., Ltd.로 통일. 공유 미리보기 이미지·검색 설명의 앱 이름 갱신
+- 확인 사항(2026-10-26): BEATRAY는 아직 App Store 미출시 / 이것좀이 내려간 이유는 저장소에 기록 없음 → Play Console에서 확인 필요

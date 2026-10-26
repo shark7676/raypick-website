@@ -44,7 +44,7 @@ export default function HeroStage() {
           scene.current = new HeroScene(
             canvas.current,
             labels.current,
-            apps.map((a) => ({ slug: a.slug, color: a.color, icon: a.icon, soon: a.status === 'coming' })),
+            apps.map((a) => ({ slug: a.slug, color: a.color, icon: a.icon, soon: a.status !== 'live' })),
             goToApp,
           );
           setSceneReady(true);
@@ -100,7 +100,7 @@ export default function HeroStage() {
       apps.map((a) => {
         const stores = [a.stores.android && 'Google Play', a.stores.ios && 'App Store'].filter(Boolean).join(' · ');
         const narrow = window.innerWidth < 760; // short labels on phones
-        return { name: a.name[language], note: a.status === 'live' ? (narrow ? t.orbit.live : `${t.orbit.live} · ${stores}`) : t.orbit.coming };
+        return { name: a.name[language], note: a.status === 'live' ? (narrow ? t.orbit.live : `${t.orbit.live} · ${stores}`) : a.status === 'updating' ? t.orbit.updating : t.orbit.coming };
       }),
     );
   }, [sceneReady, language, t]);
@@ -123,6 +123,7 @@ export default function HeroStage() {
           <p className={`eyebrow ${styles.fade}`}>
             <i className={styles.dot} />
             {t.hero.eyebrow}
+            <span className={styles.studio}> — {t.hero.studio}</span>
           </p>
           <h1 className={styles.h1}>
             <span className={styles.ln}>

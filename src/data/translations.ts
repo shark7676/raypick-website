@@ -9,11 +9,12 @@ const ko = {
   meta: {
     title: "Raypick — 일상을 비추는 앱을 만듭니다",
     description:
-      "레이픽은 앱을 직접 기획·디자인·개발해 출시하는 회사입니다. BEATRAY, Gallory, 이것좀을 Google Play와 App Store에서 만나보세요.",
+      "레이픽은 앱을 직접 기획·디자인·개발해 출시하는 회사입니다. BEATRAY, Gallory, PARRYTHM을 Google Play와 App Store에서 만나보세요.",
   },
   nav: { apps: "앱", company: "회사", contact: "문의", menu: "메뉴 열기", close: "메뉴 닫기", lang: "English" },
   hero: {
-    eyebrow: "Raypick Inc. — App Studio",
+    eyebrow: "Raypick Co., Ltd.",
+    studio: "App Studio",
     line1: "일상을 비추는",
     line2: "앱을 만듭니다.",
     sub: "기획부터 디자인, 개발, 출시까지|직접 합니다.\n지금 Google Play와 App Store에서|레이픽의 앱을 만나보세요.",
@@ -32,6 +33,7 @@ const ko = {
     sub: "리듬게임부터 사진 매거진,|동네 도움, 한일 번역 채팅까지.\n레이픽이 직접 기획하고|만들어 출시합니다.",
     live: "출시",
     coming: "출시 예정",
+    updating: "업데이트 준비 중",
   },
   showcase: {
     eyebrow: "Live now",
@@ -42,8 +44,9 @@ const ko = {
   upcoming: {
     eyebrow: "Coming soon",
     title: "곧 만나요",
-    sub: "출시를 앞두고 마지막 다듬기 중인 앱입니다.",
+    sub: "출시와 업데이트를 앞두고|다듬고 있는 앱입니다.",
     badge: "출시 예정",
+    badgeUpdating: "업데이트 준비 중",
     site: "사이트 보기",
   },
   about: {
@@ -74,7 +77,7 @@ const ko = {
     addressLabel: "주소",
     address: "경상남도 창원시 진해구 연구단지1길 16, 207-2호",
     emailLabel: "이메일",
-    rights: "© 2026 Raypick Inc. All rights reserved.",
+    rights: "© 2026 Raypick Co., Ltd. All rights reserved.",
   },
   store: { googlePlay: "Google Play", appStore: "App Store", on: "에서 받기" },
   appPage: {
@@ -84,6 +87,8 @@ const ko = {
     screenshots: "스크린샷",
     download: "다운로드",
     comingNote: "출시되면 이 페이지에서 바로 내려받을 수 있습니다.",
+    updating: "업데이트 준비 중",
+    updatingNote: "더 좋아진 모습으로 곧 다시 내려받을 수 있습니다.",
     site: "공식 사이트",
     others: "다른 앱",
   },
@@ -96,11 +101,12 @@ const en: Dict = {
   meta: {
     title: "Raypick — Apps that light up everyday life",
     description:
-      "Raypick plans, designs, builds and ships its own mobile apps. Meet BEATRAY, Gallory and Thisjom on Google Play and the App Store.",
+      "Raypick plans, designs, builds and ships its own mobile apps. Meet BEATRAY, Gallory and PARRYTHM on Google Play and the App Store.",
   },
   nav: { apps: "Apps", company: "Company", contact: "Contact", menu: "Open menu", close: "Close menu", lang: "한국어" },
   hero: {
-    eyebrow: "Raypick Inc. — App Studio",
+    eyebrow: "Raypick Co., Ltd.",
+    studio: "App Studio",
     line1: "Apps that light up",
     line2: "everyday life.",
     sub: "We plan, design, build and ship|every app ourselves.\nFind Raypick apps on Google Play|and the App Store today.",
@@ -119,6 +125,7 @@ const en: Dict = {
     sub: "From a rhythm game and a photo magazine|to neighborhood help and Korea–Japan translated chat —\nplanned, built and shipped by Raypick.",
     live: "Live",
     coming: "Coming soon",
+    updating: "Update in progress",
   },
   showcase: {
     eyebrow: "Live now",
@@ -129,8 +136,9 @@ const en: Dict = {
   upcoming: {
     eyebrow: "Coming soon",
     title: "Almost here",
-    sub: "Apps getting their final polish before launch.",
+    sub: "Apps getting their final polish|before launch or an update.",
     badge: "Coming soon",
+    badgeUpdating: "Update in progress",
     site: "Visit site",
   },
   about: {
@@ -154,14 +162,14 @@ const en: Dict = {
     copied: "Copied",
   },
   footer: {
-    company: "Raypick Inc.",
+    company: "Raypick Co., Ltd.",
     ceoLabel: "CEO",
     ceo: "Sangkwon Shin",
     bizLabel: "Business Reg. No.",
     addressLabel: "Address",
     address: "207-2, 16 Yeongudanji 1-gil, Jinhae-gu, Changwon-si, Gyeongsangnam-do, Korea",
     emailLabel: "Email",
-    rights: "© 2026 Raypick Inc. All rights reserved.",
+    rights: "© 2026 Raypick Co., Ltd. All rights reserved.",
   },
   store: { googlePlay: "Google Play", appStore: "App Store", on: "Get it on" },
   appPage: {
@@ -171,6 +179,8 @@ const en: Dict = {
     screenshots: "Screenshots",
     download: "Download",
     comingNote: "Once it launches, you can download it right here.",
+    updating: "Update in progress",
+    updatingNote: "It will be back for download soon, better than before.",
     site: "Official site",
     others: "More apps",
   },

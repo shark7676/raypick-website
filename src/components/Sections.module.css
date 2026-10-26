@@ -153,6 +153,47 @@
   }
 }
 
+/* 이것좀: two app screens floating on its green */
+.soon_thisjom {
+  background: radial-gradient(80% 60% at 50% 15%, #b9e88f 0%, transparent 70%), linear-gradient(170deg, #8fd162 0%, #5fb23b 45%, #2c6f25 100%);
+  color: #fff;
+}
+
+.soon_thisjom .soonBody {
+  background: linear-gradient(180deg, transparent, rgba(16, 48, 18, 0.72) 50%);
+}
+
+.tShot {
+  --r: 0deg;
+  position: absolute;
+  top: 6%;
+  width: 30%;
+  height: auto;
+  border-radius: 18px;
+  border: 5px solid #10131a;
+  box-shadow: 0 24px 40px -18px rgba(10, 40, 12, 0.6);
+  transform: rotate(var(--r));
+  animation: tiltFloat 6s ease-in-out infinite;
+}
+
+.tS0 {
+  --r: -7deg;
+  left: 16%;
+}
+
+.tS1 {
+  --r: 6deg;
+  right: 16%;
+  top: 3%;
+  animation-delay: -3s;
+}
+
+@keyframes tiltFloat {
+  50% {
+    transform: translateY(-12px) rotate(var(--r));
+  }
+}
+
 .soonBody {
   position: relative;
   width: 100%;

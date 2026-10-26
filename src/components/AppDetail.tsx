@@ -9,6 +9,9 @@ import type { PhoneScene } from '../lib/three/phoneScene';
 import StoreButtons from './StoreButtons';
 import styles from './AppDetail.module.css';
 
+/** store screenshot heights at 720px width (they differ per store / app) */
+const shotHeight: Record<string, number> = { beatray: 1440, parrythm: 1565 };
+
 export default function AppDetail({ slug }: { slug: string }) {
   const app = getApp(slug)!;
   const { t, language } = useLanguage();
@@ -33,6 +36,7 @@ export default function AppDetail({ slug }: { slug: string }) {
   }, [app, hasPhone]);
 
   const live = app.status === 'live';
+  const statusLabel = live ? t.appPage.live : app.status === 'updating' ? t.appPage.updating : t.appPage.coming;
   const others = apps.filter((a) => a.slug !== app.slug);
 
   return (
@@ -46,14 +50,14 @@ export default function AppDetail({ slug }: { slug: string }) {
           <div className={styles.nameRow}>
             <Image className={styles.icon} src={app.icon} alt="" width={84} height={84} priority />
             <div>
-              <span className={`${styles.badge} ${live ? styles.live : styles.soon}`}>{live ? t.appPage.live : t.appPage.coming}</span>
+              <span className={`${styles.badge} ${live ? styles.live : styles.soon}`}>{statusLabel}</span>
               <h1 className={styles.name}>{app.name[language]}</h1>
               <p className={styles.genre}>{app.genre[language]}</p>
             </div>
           </div>
           <p className={styles.tagline}>{app.tagline[language]}</p>
           <p className={styles.desc}>{app.description[language]}</p>
-          {live ? <StoreButtons app={app} /> : <p className={styles.note}>{t.appPage.comingNote}</p>}
+          {live ? <StoreButtons app={app} /> : <p className={styles.note}>{app.status === 'updating' ? t.appPage.updatingNote : t.appPage.comingNote}</p>}
           {app.site && (
             <a className={styles.site} href={app.site} target="_blank" rel="noopener noreferrer">
               {t.appPage.site} ↗
@@ -79,7 +83,7 @@ export default function AppDetail({ slug }: { slug: string }) {
           <h2 className={styles.h2}>{t.appPage.screenshots}</h2>
           <div className={styles.strip}>
             {app.shots.map((src, i) => (
-              <Image key={src} src={src} alt={`${app.name[language]} ${i + 1}`} width={720} height={app.slug === 'beatray' ? 1440 : 1280} sizes="280px" />
+              <Image key={src} src={src} alt={`${app.name[language]} ${i + 1}`} width={720} height={shotHeight[app.slug] ?? 1280} sizes="280px" />
             ))}
           </div>
         </section>
@@ -103,7 +107,7 @@ export default function AppDetail({ slug }: { slug: string }) {
               <Image src={a.icon} alt="" width={56} height={56} />
               <span>
                 <b>{a.name[language]}</b>
-                <small>{a.status === 'live' ? t.appPage.live : t.appPage.coming}</small>
+                <small>{a.status === 'live' ? t.appPage.live : a.status === 'updating' ? t.appPage.updating : t.appPage.coming}</small>
               </span>
             </Link>
           ))}

@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { PointerEvent } from 'react';
-import { comingApps } from '../data/apps';
+import { upcomingApps } from '../data/apps';
 import { useLanguage } from '../context/LanguageContext';
+import Phrases from './Phrases';
 import Reveal from './Reveal';
 import styles from './Sections.module.css';
 
@@ -35,11 +36,13 @@ export default function Upcoming() {
         <h2 id="upcoming-title" className={styles.h2}>
           {t.upcoming.title}
         </h2>
-        <p className={styles.lead}>{t.upcoming.sub}</p>
+        <p className={styles.lead}>
+          <Phrases text={t.upcoming.sub} />
+        </p>
       </Reveal>
 
       <div className={styles.soonGrid}>
-        {comingApps.map((a, i) => (
+        {upcomingApps.map((a, i) => (
           <Reveal key={a.slug} delay={i * 120}>
             <article id={`soon-${a.slug}`} className={`${styles.soon} ${styles[`soon_${a.slug}`] ?? ''}`} onPointerMove={tilt} onPointerLeave={untilt}>
               <div className={styles.soonArt} aria-hidden="true">
@@ -49,11 +52,15 @@ export default function Upcoming() {
                     <Image className={styles.pChar} src="/apps/parrythm/art-riff.webp" alt="" width={640} height={853} sizes="(max-width: 900px) 60vw, 30vw" />
                   </>
                 )}
+                {a.slug === 'thisjom' &&
+                  a.screens.slice(0, 2).map((src, k) => (
+                    <Image key={src} className={`${styles.tShot} ${styles[`tS${k}`]}`} src={src} alt="" width={600} height={1200} sizes="(max-width: 900px) 34vw, 16vw" />
+                  ))}
                 {a.slug === 'haruyo' &&
                   a.art?.map((src, k) => <Image key={src} className={`${styles.hArt} ${styles[`hA${k}`]}`} src={src} alt="" width={360} height={340} sizes="(max-width: 900px) 26vw, 13vw" />)}
               </div>
               <div className={styles.soonBody}>
-                <span className={styles.badge}>{t.upcoming.badge}</span>
+                <span className={styles.badge}>{a.status === 'updating' ? t.upcoming.badgeUpdating : t.upcoming.badge}</span>
                 <div className={styles.soonName}>
                   <Image src={a.icon} alt="" width={56} height={56} />
                   <div>

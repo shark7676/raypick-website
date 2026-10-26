@@ -9,7 +9,7 @@ import styles from './StoreButtons.module.css';
 export default function StoreButtons({ app, tone = 'dark' }: { app: AppItem; tone?: 'dark' | 'light' }) {
   const { t } = useLanguage();
   const { android, ios } = app.stores;
-  if (!android && !ios) return null;
+  if (app.status !== 'live' || (!android && !ios)) return null;
 
   return (
     <div className={`${styles.row} ${tone === 'light' ? styles.light : ''}`}>
