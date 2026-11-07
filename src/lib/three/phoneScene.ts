@@ -23,11 +23,18 @@ interface Phone {
 }
 
 const SW = 0.92, SH = 1.84, BW = 1.0, BH = 1.94, DEPTH = 0.07;
-const SLOTS = [
-  { x: 0, y: 0.12, z: 0.35, ry: -0.06, s: 1 }, // front
-  { x: 1.38, y: -0.14, z: -0.6, ry: -0.42, s: 0.84 }, // right
-  { x: -1.38, y: -0.1, z: -0.6, ry: 0.42, s: 0.84 }, // left
-];
+const FRONT = { x: 0, y: 0.12, z: 0.35, ry: -0.06, s: 1 };
+const RIGHT = { x: 1.38, y: -0.14, z: -0.6, ry: -0.42, s: 0.84 };
+const LEFT = { x: -1.38, y: -0.1, z: -0.6, ry: 0.42, s: 0.84 };
+const BACK = { x: 0, y: -0.04, z: -1.6, ry: 0, s: 0.7 }; // waits behind the front phone
+
+/** carousel spot of the phone `rel` places after the front one — works for any number of apps */
+function slotFor(rel: number, n: number) {
+  if (rel === 0) return FRONT;
+  if (rel === 1) return RIGHT;
+  if (rel === n - 1) return LEFT;
+  return BACK;
+}
 
 function roundedRect(w: number, h: number, r: number) {
   const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
@@ -140,7 +147,7 @@ export class PhoneScene {
       const shadow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false }));
       shadow.rotation.x = -Math.PI / 2;
       this.scene.add(shadow);
-      const slot = { ...SLOTS[(i - this.active + apps.length) % apps.length] };
+      const slot = { ...slotFor((i - this.active + apps.length) % apps.length, apps.length) };
       this.phones.push({ group, a, b, textures, idx: 0, phase: 0, shadow, slot });
     });
 
@@ -218,7 +225,7 @@ export class PhoneScene {
     const n = this.phones.length;
     const k = Math.min(1, dt * 5);
     this.phones.forEach((p, i) => {
-      const target = SLOTS[(i - this.active + n) % n];
+      const target = slotFor((i - this.active + n) % n, n);
       p.slot.x += (target.x - p.slot.x) * k;
       p.slot.y += (target.y - p.slot.y) * k;
       p.slot.z += (target.z - p.slot.z) * k;

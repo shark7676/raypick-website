@@ -10,7 +10,7 @@ import StoreButtons from './StoreButtons';
 import styles from './AppDetail.module.css';
 
 /** store screenshot heights at 720px width (they differ per store / app) */
-const shotHeight: Record<string, number> = { beatray: 1440, parrythm: 1565 };
+const shotHeight: Record<string, number> = { beatray: 1440, parrythm: 1565, sleepytroupe: 1440 };
 
 export default function AppDetail({ slug }: { slug: string }) {
   const app = getApp(slug)!;

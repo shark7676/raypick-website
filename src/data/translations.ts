@@ -9,7 +9,7 @@ const ko = {
   meta: {
     title: "Raypick — 일상을 비추는 앱을 만듭니다",
     description:
-      "레이픽은 앱을 직접 기획·디자인·개발해 출시하는 회사입니다. BEATRAY, Gallory, PARRYTHM을 Google Play와 App Store에서 만나보세요.",
+      "레이픽은 앱을 직접 기획·디자인·개발해 출시하는 회사입니다. BEATRAY, Gallory, PARRYTHM, 꾸벅 공연단을 Google Play와 App Store에서 만나보세요.",
   },
   nav: { apps: "앱", company: "회사", contact: "문의", menu: "메뉴 열기", close: "메뉴 닫기", lang: "English" },
   hero: {
@@ -30,7 +30,7 @@ const ko = {
     eyebrow: "One studio · Growing worlds",
     title1: "하나의 스튜디오,",
     title2: "계속 늘어나는 세계.",
-    sub: "리듬게임부터 사진 매거진,|동네 도움, 한일 번역 채팅까지.\n레이픽이 직접 기획하고|만들어 출시합니다.",
+    sub: "리듬게임과 퍼즐부터 사진 매거진,|동네 도움, 한일 번역 채팅까지.\n레이픽이 직접 기획하고|만들어 출시합니다.",
     live: "출시",
     coming: "출시 예정",
     updating: "업데이트 준비 중",
@@ -101,7 +101,7 @@ const en: Dict = {
   meta: {
     title: "Raypick — Apps that light up everyday life",
     description:
-      "Raypick plans, designs, builds and ships its own mobile apps. Meet BEATRAY, Gallory and PARRYTHM on Google Play and the App Store.",
+      "Raypick plans, designs, builds and ships its own mobile apps. Meet BEATRAY, Gallory, PARRYTHM and Sleepy Troupe on Google Play and the App Store.",
   },
   nav: { apps: "Apps", company: "Company", contact: "Contact", menu: "Open menu", close: "Close menu", lang: "한국어" },
   hero: {
@@ -122,7 +122,7 @@ const en: Dict = {
     eyebrow: "One studio · Growing worlds",
     title1: "One studio,",
     title2: "ever-growing worlds.",
-    sub: "From a rhythm game and a photo magazine|to neighborhood help and Korea–Japan translated chat —\nplanned, built and shipped by Raypick.",
+    sub: "From rhythm games, puzzles and a photo magazine|to neighborhood help and Korea–Japan translated chat —\nplanned, built and shipped by Raypick.",
     live: "Live",
     coming: "Coming soon",
     updating: "Update in progress",

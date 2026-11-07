@@ -115,6 +115,24 @@ export const apps: AppItem[] = [
     site: "https://parrythm.com",
   },
   {
+    slug: "sleepytroupe",
+    status: "live", // Google Play 2026-11 · App Store 심사 중 (통과하면 stores.ios 추가)
+    name: { ko: "꾸벅 공연단", en: "Sleepy Troupe" },
+    genre: { ko: "추리 퍼즐 게임", en: "Logic puzzle game" },
+    tagline: { ko: "팻말을 읽고 공연단을 제자리에!", en: "Read the signs, seat the troupe!" },
+    description: {
+      ko: "까다로운 꾸벅 공연단 단원들의 팻말을 읽고 모두가 바라는 자리에 앉혀, 잠 못 드는 손님을 재워 주는 추리 퍼즐이에요. 정답이 딱 하나인 손수 만든 퍼즐 200판을 풀 때마다 피아노 자장가가 한 소절씩 완성돼요.",
+      en: "Read each picky troupe member's sign and seat everyone just right so the sleepless guest drifts off to dreamland. 200 handmade logic puzzles, each with a single answer, and a piano lullaby that grows one bar with every puzzle you solve.",
+    },
+    color: "#C51029",
+    icon: "/apps/sleepytroupe/icon.webp",
+    screens: img("sleepytroupe", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
+    shots: img("sleepytroupe", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
+    frame: "#5B3F94",
+    stores: { android: "https://play.google.com/store/apps/details?id=com.raypick.sleepytroupe" },
+    site: "https://sleepytroupe.com",
+  },
+  {
     slug: "haruyo",
     status: "coming",
     name: { ko: "하루요", en: "Haruyo" },
