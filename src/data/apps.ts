@@ -50,7 +50,10 @@ export const apps: AppItem[] = [
     screens: img("beatray", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
     shots: img("beatray", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
     frame: "#3a3f4a",
-    stores: { android: "https://play.google.com/store/apps/details?id=com.raypick.beatray" },
+    stores: {
+      android: "https://play.google.com/store/apps/details?id=com.raypick.beatray",
+      ios: "https://apps.apple.com/app/id6835073433", // App Store 2026-11-16
+    },
     site: "https://playbeatray.com",
   },
   {

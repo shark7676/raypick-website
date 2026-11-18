@@ -3,13 +3,13 @@
 > 이 파일은 "지금까지의 핵심 기억"이다. 대화가 길어지거나 새로 시작해도 이 파일만 읽으면 이어서 일할 수 있다.
 > 설계·결정 이유 전체: [docs/DESIGN.md](docs/DESIGN.md) · 작업 내역·사용법: [CHANGELOG.md](CHANGELOG.md)
 
-**마지막 갱신:** 2026-11-08
+**마지막 갱신:** 2026-11-18
 
 ## 🎯 목표
 raypick.co.kr을 "실제로 앱을 출시하는 회사"로 보이게 하는 회사 홈페이지 (목적 = 회사 신뢰도, 앱 회사로만).
 
 ## 🧱 스택
-Next.js 16.4.3 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretendard(npm 내장) · Vercel
+Next.js 16.4.6 (App Router) · React 19 · TypeScript · three.js 0.186 · Pretendard(npm 내장) · Vercel
 - GitHub `shark7676/raypick-website` **main에 push하면 Vercel이 바로 실제 사이트에 배포** (Vercel 프로젝트 `raypick`, `raypick-website` 둘 다 빌드됨)
 - 로컬 폴더 `D:\project\Raypick Office` · 미리보기 `npm run dev` → http://localhost:3000
 
@@ -41,7 +41,6 @@ Next.js 16.4.3 (App Router) · React 19 · TypeScript · three.js 0.186 · Prete
 ## 🚧 지금 막힌 것 / 주의할 점
 - **이것좀이 구글 플레이에서 내려가 있음(404, 2026-10-26 확인).** 이유는 저장소에 기록 없음 → Play Console 확인 필요. 다시 올라오면 `apps.ts`에서 thisjom `status: "live"`로만 바꾸면 원래대로.
 - 하루요는 아직 진짜 앱 아이콘 없음(Flutter 기본) → 홈페이지는 임시 파스텔 아이콘 사용.
-- BEATRAY는 아직 App Store 미출시(구글만).
 - 작업용 파일 `public/drafts/`(시안), `_assets/`(원본 자료), `로고.png`는 .gitignore로 제외 — 이 컴퓨터에만 있음.
 - 미리보기 서버가 켜진 채 `npm install`을 하면 서버가 깨짐 → 서버 끄고 설치·빌드.
 - 배포 전 확인 원칙: main push = 실제 사이트 변경이므로 매번 대표 확인 후 올림.
@@ -49,5 +48,6 @@ Next.js 16.4.3 (App Router) · React 19 · TypeScript · three.js 0.186 · Prete
 ## ▶️ 다음에 할 일
 1. 이것좀이 구글 플레이에 다시 올라오면 `updating` → `live`로 되돌리기 (대표가 알려주면).
 2. 하루요 진짜 아이콘·스토어 출시 시 `public/apps/haruyo/` 교체 + `status: "live"`·스토어 링크 추가.
-3. BEATRAY·꾸벅 공연단 App Store 출시 시 `apps.ts`의 `stores.ios` 링크 추가 (꾸벅 공연단: 2026-11-05 재제출, 심사 대기).
+3. 꾸벅 공연단 App Store 출시 시 대기 브랜치 `pending/sleepytroupe-ios`(App Store 링크 id6830123844, 2026-11-08 대표 결정으로 미리 만들어 둠)를 main에 합쳐 배포. 승인 전까지는 링크가 404라 올리지 않음.
+- 2026-11-18 BEATRAY App Store 출시(11-16) 반영: App Store 버튼 추가(id6835073433). Next 16.4.3 → 16.4.6(보통 등급 보안 경고 해결, 빌드가 경고로 멈췄던 것 해결).
 - 참고: 꾸벅 공연단 게임 폴더는 `D:\GameDev\counting-sheep` (GitHub에 안 올린 기록이 많음).
