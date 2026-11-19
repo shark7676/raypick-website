@@ -19,6 +19,8 @@ export interface AppItem {
   screens: string[];
   /** Store screenshots — shown in the gallery on the app page */
   shots: string[];
+  /** English store screenshots, when the store has a separate English set */
+  shotsEn?: string[];
   /** Key art for apps that are not out yet */
   art?: string[];
   /** 3D phone frame color */
@@ -42,13 +44,15 @@ export const apps: AppItem[] = [
     genre: { ko: "리듬게임", en: "Rhythm game" },
     tagline: { ko: "놓치면 목소리가 사라지는 리듬게임", en: "Miss a note, the vocals vanish" },
     description: {
-      ko: "정확히 칠수록 보컬이 돌아오고 놓치면 사라지는 '보컬 복원' 4레인 리듬게임. K-POP부터 애니송까지 12장르, 전곡 오리지널입니다.",
-      en: "A 4-lane rhythm game built on Vocal Restore: hit clean and the vocals come back, miss and they fade. 12 genres, every track original.",
+      ko: "정확히 칠수록 보컬이 돌아오고 놓치면 사라지는 '보컬 복원' 4레인 리듬게임. 2.0에서는 게임 전체가 라이브 공연장이 되어, 무대 위 가수가 함께 노래합니다. K-POP부터 애니송까지 18장르 131곡, 전곡 오리지널입니다.",
+      en: "A 4-lane rhythm game built on Vocal Restore: hit clean and the vocals come back, miss and they fade. In 2.0 the whole game is a live concert, with a singer on stage singing along. 18 genres, 131 tracks, every one original.",
     },
     color: "#2FCFE8",
     icon: "/apps/beatray/icon.webp",
-    screens: img("beatray", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
-    shots: img("beatray", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
+    screens: img("beatray", ["v2/screen1.webp", "v2/screen2.webp", "v2/screen3.webp", "v2/screen4.webp"]),
+    // 2.0 (2026-11): App Store screenshots, Korean + English sets
+    shots: img("beatray", ["v2/shot1.webp", "v2/shot2.webp", "v2/shot3.webp", "v2/shot4.webp", "v2/shot5.webp", "v2/shot6.webp"]),
+    shotsEn: img("beatray", ["v2/en/shot1.webp", "v2/en/shot2.webp", "v2/en/shot3.webp", "v2/en/shot4.webp", "v2/en/shot5.webp", "v2/en/shot6.webp"]),
     frame: "#3a3f4a",
     stores: {
       android: "https://play.google.com/store/apps/details?id=com.raypick.beatray",

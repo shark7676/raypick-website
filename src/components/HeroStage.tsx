@@ -3,11 +3,14 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { apps, comingApps, liveApps } from '../data/apps';
+
+/** apps that have shipped — including one briefly off the store for an update */
+const releasedCount = apps.filter((a) => a.status !== 'coming').length;
 import { company } from '../data/translations';
 import { useLanguage } from '../context/LanguageContext';
 import { glideTo } from '../lib/smoothScroll';
 import type { HeroScene } from '../lib/three/heroScene';
-import { AppleIcon, GooglePlayIcon } from './icons';
+import { AppStoreIcon, GooglePlayIcon } from './icons';
 import Phrases from './Phrases';
 import styles from './HeroStage.module.css';
 
@@ -155,7 +158,7 @@ export default function HeroStage() {
           <div className={`${styles.proof} ${styles.fade} ${styles.d3}`}>
             <div className={styles.stats}>
               <div className={styles.stat}>
-                <b>{String(liveApps.length).padStart(2, '0')}</b>
+                <b>{String(releasedCount).padStart(2, '0')}</b>
                 <span>{t.hero.statLive}</span>
               </div>
               <div className={styles.stat}>
@@ -169,11 +172,11 @@ export default function HeroStage() {
             </div>
             <div className={styles.stores}>
               <span className={styles.chip}>
-                <GooglePlayIcon size={14} />
+                <GooglePlayIcon size={16} />
                 Google Play
               </span>
               <span className={styles.chip}>
-                <AppleIcon size={14} />
+                <AppStoreIcon size={16} />
                 App Store
               </span>
             </div>

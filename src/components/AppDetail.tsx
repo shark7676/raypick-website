@@ -10,7 +10,7 @@ import StoreButtons from './StoreButtons';
 import styles from './AppDetail.module.css';
 
 /** store screenshot heights at 720px width (they differ per store / app) */
-const shotHeight: Record<string, number> = { beatray: 1440, parrythm: 1565, sleepytroupe: 1440 };
+const shotHeight: Record<string, number> = { beatray: 1565, parrythm: 1565, sleepytroupe: 1440 };
 
 export default function AppDetail({ slug }: { slug: string }) {
   const app = getApp(slug)!;
@@ -38,6 +38,7 @@ export default function AppDetail({ slug }: { slug: string }) {
   const live = app.status === 'live';
   const statusLabel = live ? t.appPage.live : app.status === 'updating' ? t.appPage.updating : t.appPage.coming;
   const others = apps.filter((a) => a.slug !== app.slug);
+  const shots = language === 'en' && app.shotsEn ? app.shotsEn : app.shots;
 
   return (
     <main className={`day ${styles.page}`} data-nav="light" style={{ '--tint': app.color } as CSSProperties}>
@@ -78,11 +79,11 @@ export default function AppDetail({ slug }: { slug: string }) {
         </div>
       </section>
 
-      {app.shots.length > 0 && (
+      {shots.length > 0 && (
         <section className={styles.shots} aria-label={t.appPage.screenshots}>
           <h2 className={styles.h2}>{t.appPage.screenshots}</h2>
           <div className={styles.strip}>
-            {app.shots.map((src, i) => (
+            {shots.map((src, i) => (
               <Image key={src} src={src} alt={`${app.name[language]} ${i + 1}`} width={720} height={shotHeight[app.slug] ?? 1280} sizes="280px" />
             ))}
           </div>

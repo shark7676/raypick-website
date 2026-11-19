@@ -4,12 +4,14 @@
   gap: 10px;
 }
 
+/* both store buttons are exactly the same size */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  height: 52px;
-  padding: 0 18px 0 16px;
+  gap: 11px;
+  flex: 0 0 186px;
+  height: 54px;
+  padding: 0 16px;
   border-radius: 14px;
   background: var(--day-ink);
   color: #fff;
@@ -37,6 +39,26 @@
   text-transform: uppercase;
   opacity: 0.75;
   margin-bottom: 3px;
+}
+
+.btn svg {
+  flex: none;
+}
+
+/* narrow phones: two equal halves on one row */
+@media (max-width: 420px) {
+  .row {
+    flex-wrap: nowrap;
+  }
+  .btn {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 9px;
+    padding: 0 12px;
+  }
+  .btn span {
+    font-size: 15px;
+  }
 }
 
 .light .btn {

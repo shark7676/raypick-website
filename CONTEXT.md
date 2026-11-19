@@ -51,4 +51,5 @@ Next.js 16.4.6 (App Router) · React 19 · TypeScript · three.js 0.186 · Lenis
 - 2026-11-18 BEATRAY App Store 출시(11-16) 반영: App Store 버튼 추가(id6835073433). Next 16.4.3 → 16.4.6(보통 등급 보안 경고 해결, 빌드가 경고로 멈췄던 것 해결).
 - 2026-11-20 꾸벅 공연단 App Store 출시(11-19) 반영: App Store 버튼 추가(id6830123844). 이제 출시 앱 4개 모두 구글·애플 둘 다. (대기용 로컬 브랜치 `pending/sleepytroupe-ios`는 더 필요 없음)
 - 2026-11-20 스크롤 고급화(B안, 대표 선택): 마우스 휠 부드러운 스크롤(Lenis), 첫 화면 글자·3D 같은 속도, 느린 기기 자동 화질 낮춤, 메뉴 열면 스크롤 멈춤. 레이아웃은 그대로.
+- 2026-11-20 첫 화면 문구 정리(기획~출시 문장 삭제)·출시된 앱 05(이것좀 포함), 스토어 공식 컬러 아이콘·다운로드 버튼 같은 크기, BEATRAY 2.0 화면·스크린샷(한/영)·문구(18장르 131곡). BEATRAY 원본 자료: GitHub `shark7676/rhythm`의 `site/v2_*.webp`, `StoreAssets/ios/{ko,en}/`.
 - 참고: 꾸벅 공연단 게임 폴더는 `D:\GameDev\counting-sheep` (GitHub에 안 올린 기록이 많음).
