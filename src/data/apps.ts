@@ -119,7 +119,7 @@ export const apps: AppItem[] = [
   },
   {
     slug: "sleepytroupe",
-    status: "live", // Google Play 2026-11 · App Store 심사 중 (통과하면 stores.ios 추가)
+    status: "live", // Google Play 2026-11 · App Store 2026-11-19
     name: { ko: "꾸벅 공연단", en: "Sleepy Troupe" },
     genre: { ko: "추리 퍼즐 게임", en: "Logic puzzle game" },
     tagline: { ko: "팻말을 읽고 공연단을 제자리에!", en: "Read the signs, seat the troupe!" },
@@ -132,7 +132,10 @@ export const apps: AppItem[] = [
     screens: img("sleepytroupe", ["screen1.webp", "screen2.webp", "screen3.webp", "screen4.webp"]),
     shots: img("sleepytroupe", ["shot1.webp", "shot2.webp", "shot3.webp", "shot4.webp"]),
     frame: "#5B3F94",
-    stores: { android: "https://play.google.com/store/apps/details?id=com.raypick.sleepytroupe" },
+    stores: {
+      android: "https://play.google.com/store/apps/details?id=com.raypick.sleepytroupe",
+      ios: "https://apps.apple.com/app/id6830123844", // App Store 2026-11-19
+    },
     site: "https://sleepytroupe.com",
   },
   {

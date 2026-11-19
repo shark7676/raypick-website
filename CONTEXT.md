@@ -3,7 +3,7 @@
 > 이 파일은 "지금까지의 핵심 기억"이다. 대화가 길어지거나 새로 시작해도 이 파일만 읽으면 이어서 일할 수 있다.
 > 설계·결정 이유 전체: [docs/DESIGN.md](docs/DESIGN.md) · 작업 내역·사용법: [CHANGELOG.md](CHANGELOG.md)
 
-**마지막 갱신:** 2026-11-18
+**마지막 갱신:** 2026-11-20
 
 ## 🎯 목표
 raypick.co.kr을 "실제로 앱을 출시하는 회사"로 보이게 하는 회사 홈페이지 (목적 = 회사 신뢰도, 앱 회사로만).
@@ -48,6 +48,6 @@ Next.js 16.4.6 (App Router) · React 19 · TypeScript · three.js 0.186 · Prete
 ## ▶️ 다음에 할 일
 1. 이것좀이 구글 플레이에 다시 올라오면 `updating` → `live`로 되돌리기 (대표가 알려주면).
 2. 하루요 진짜 아이콘·스토어 출시 시 `public/apps/haruyo/` 교체 + `status: "live"`·스토어 링크 추가.
-3. 꾸벅 공연단 App Store 출시 시 대기 브랜치 `pending/sleepytroupe-ios`(App Store 링크 id6830123844, 2026-11-08 대표 결정으로 미리 만들어 둠)를 main에 합쳐 배포. 승인 전까지는 링크가 404라 올리지 않음.
 - 2026-11-18 BEATRAY App Store 출시(11-16) 반영: App Store 버튼 추가(id6835073433). Next 16.4.3 → 16.4.6(보통 등급 보안 경고 해결, 빌드가 경고로 멈췄던 것 해결).
+- 2026-11-20 꾸벅 공연단 App Store 출시(11-19) 반영: App Store 버튼 추가(id6830123844). 이제 출시 앱 4개 모두 구글·애플 둘 다. (대기용 로컬 브랜치 `pending/sleepytroupe-ios`는 더 필요 없음)
 - 참고: 꾸벅 공연단 게임 폴더는 `D:\GameDev\counting-sheep` (GitHub에 안 올린 기록이 많음).
