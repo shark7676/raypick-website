@@ -39,6 +39,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Lenis drives the scroll itself — the browser must not smooth it a second time */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 body {
   background: var(--night);
   color: var(--night-ink);

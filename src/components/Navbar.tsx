@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { scrollHome } from '../lib/scrollHome';
+import { lockScroll } from '../lib/smoothScroll';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -36,7 +37,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    lockScroll(open);
   }, [open]);
 
   const close = () => setOpen(false);

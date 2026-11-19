@@ -132,6 +132,11 @@ export class HeroScene {
   private raf = 0;
   private active = true;
   private started = false;
+  /** 0 = full quality; steps down (fewer pixels, less edge smoothing) if the device can't keep up */
+  private quality = 0;
+  private perf = { skip: 30, n: 0, sum: 0 };
+  /** called every frame with the eased scroll progress, so page text moves with the 3D */
+  onProgress?: (p: number) => void;
   private tmp = new THREE.Vector3();
   private look = new THREE.Vector3();
   private triLocal = new THREE.Vector3(LOGO_TRIANGLE_CENTER.x, LOGO_TRIANGLE_CENTER.y, 20);
@@ -142,7 +147,8 @@ export class HeroScene {
     apps: OrbitApp[],
     private onTile: (slug: string) => void,
   ) {
-    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    // no canvas antialias: everything is drawn into the multisampled composer target first
+    this.renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: "high-performance" });
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.05;
     this.scene.background = new THREE.Color("#03050b");
@@ -340,7 +346,7 @@ export class HeroScene {
 
     // ---- post
     // multisampled target: without it the thin edge highlights alias into crawling dotted lines
-    const samples = Math.min(window.innerWidth < 760 ? 4 : 8, this.renderer.capabilities.maxSamples);
+    const samples = this.samples();
     const target = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples });
     this.composer = new EffectComposer(this.renderer, target);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -367,6 +373,11 @@ export class HeroScene {
         this.t0 = this.last = performance.now();
         if (this.active) this.raf = requestAnimationFrame(this.frame);
       });
+  }
+
+  /** true while frames are being drawn (then onProgress drives the page text) */
+  isRunning() {
+    return this.started && this.active;
   }
 
   setProgress(p: number) {
@@ -419,7 +430,7 @@ export class HeroScene {
     const w = this.canvas.clientWidth || window.innerWidth;
     const h = this.canvas.clientHeight || window.innerHeight;
     this.small = w < 760;
-    const pr = Math.min(window.devicePixelRatio, this.small ? 1.5 : 1.75);
+    const pr = Math.min(window.devicePixelRatio, [this.small ? 1.5 : 1.75, 1.25, 1][this.quality]);
     this.renderer.setPixelRatio(pr);
     this.renderer.setSize(w, h, false);
     this.composer.setPixelRatio(pr);
@@ -486,12 +497,40 @@ export class HeroScene {
     this.canvas.classList.remove("dragging");
   };
 
+  private samples() {
+    const s = [window.innerWidth < 760 ? 4 : 8, 4, 2][this.quality];
+    return Math.min(s, this.renderer.capabilities.maxSamples);
+  }
+
+  /** Watch frame times; on a slow device draw fewer pixels so scrolling stays smooth. */
+  private watchPerf(ms: number) {
+    if (this.quality >= 2 || document.hidden || ms > 100) return; // hidden tabs / hiccups don't count
+    if (this.perf.skip > 0) return void this.perf.skip--; // shader warm-up
+    this.perf.n++;
+    this.perf.sum += ms;
+    if (this.perf.n < 60) return;
+    const avg = this.perf.sum / this.perf.n;
+    this.perf.n = this.perf.sum = 0;
+    if (avg < 24) return; // ~40 fps or better is fine
+    this.quality++;
+    this.canvas.dataset.q = String(this.quality);
+    const s = this.samples();
+    [this.composer.renderTarget1, this.composer.renderTarget2].forEach((rt) => {
+      rt.samples = s;
+      rt.dispose(); // reallocated with the new sample count on next use
+    });
+    this.resize();
+    this.perf.skip = 20;
+  }
+
   private frame = (now: number) => {
+    this.watchPerf(now - this.last);
     const t = (now - this.t0) / 1000;
     const dt = Math.min((now - this.last) / 1000, 0.05);
     this.last = now;
     this.progress += (this.target - this.progress) * Math.min(1, dt * 7);
     const p = this.progress;
+    this.onProgress?.(p);
     const idle = this.reduce ? 0 : 1;
 
     const intro = this.reduce ? 1 : easeOut(t / 2.6);

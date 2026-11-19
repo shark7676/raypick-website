@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { apps, comingApps, liveApps } from '../data/apps';
 import { company } from '../data/translations';
 import { useLanguage } from '../context/LanguageContext';
+import { glideTo } from '../lib/smoothScroll';
 import type { HeroScene } from '../lib/three/heroScene';
 import { AppleIcon, GooglePlayIcon } from './icons';
 import Phrases from './Phrases';
@@ -19,7 +20,8 @@ const smooth = (a: number, b: number, x: number) => {
 /** Live apps scroll to their showcase panel, upcoming ones to their card. */
 function goToApp(slug: string) {
   const live = liveApps.some((a) => a.slug === slug);
-  document.getElementById(live ? `app-${slug}` : `soon-${slug}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const el = document.getElementById(live ? `app-${slug}` : `soon-${slug}`);
+  if (el) glideTo(el, -(window.innerHeight - el.getBoundingClientRect().height) / 2); // centered
 }
 
 export default function HeroStage() {
@@ -47,6 +49,7 @@ export default function HeroStage() {
             apps.map((a) => ({ slug: a.slug, color: a.color, icon: a.icon, soon: a.status !== 'live' })),
             goToApp,
           );
+          scene.current.onProgress = applyOverlays;
           setSceneReady(true);
           onScroll();
         })
@@ -64,6 +67,13 @@ export default function HeroStage() {
       const r = el.getBoundingClientRect();
       const p = clamp01(-r.top / (r.height - window.innerHeight));
       scene.current?.setProgress(p);
+      // dawn rises over the last part of the scroll and must meet the apps section below exactly → raw scroll
+      dawnRef.current?.style.setProperty('--d', smooth(0.84, 1, p).toFixed(4));
+      // while the 3D is drawing, it hands back its eased progress (onProgress) so text and 3D glide together
+      if (!scene.current?.isRunning()) applyOverlays(p);
+    }
+
+    function applyOverlays(p: number) {
       const a = 1 - smooth(0.08, 0.24, p);
       const b = smooth(0.46, 0.58, p) * (1 - smooth(0.84, 0.92, p));
       if (aRef.current) {
@@ -76,8 +86,6 @@ export default function HeroStage() {
         bRef.current.style.transform = `translateY(${((1 - smooth(0.46, 0.6, p)) * 40).toFixed(1)}px)`;
         bRef.current.style.visibility = b < 0.01 ? 'hidden' : 'visible';
       }
-      // dawn rises over the last part of the scroll and meets the apps section below
-      dawnRef.current?.style.setProperty('--d', smooth(0.84, 1, p).toFixed(4));
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

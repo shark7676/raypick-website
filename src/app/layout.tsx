@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Michroma } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SmoothScroll from "../components/SmoothScroll";
 import { LanguageProvider } from "../context/LanguageContext";
 import { translations } from "../data/translations";
 import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const michroma = Michroma({
@@ -43,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={michroma.variable}>
       <body>
+        <SmoothScroll />
         <LanguageProvider>
           <Navbar />
           {children}
